@@ -1,15 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="27b06ab7-fbe4-4449-8daa-c4dfadfd5a3e" name="Changes" comment="" />
+    <list default="true" id="27b06ab7-fbe4-4449-8daa-c4dfadfd5a3e" name="Changes" comment="hola">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/core.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Cercle.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Colors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Mides.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull_de_faltes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Recull_de_faltes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Recull_de_faltes.iml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Mariona08"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/Mariona08/Recull-de-fsltes",
+    "accountId": "206ff952-1605-4b38-a283-c1c2f6abefc1"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 8
 }]]></component>
@@ -21,10 +51,17 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Cercle.executor": "Run",
+    "Application.Colors.executor": "Run",
+    "Application.Recull_de_faltes.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "/Users/marionapedralssureda/IdeaProjects/Recull_de_faltes/src/Main.java"
+    "onboarding.tips.debug.path": "/Users/marionapedralssureda/IdeaProjects/Recull_de_faltes/src/Main.java",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -36,7 +73,20 @@
       <option name="presentableId" value="Default" />
       <updated>1758889216296</updated>
     </task>
+    <task id="LOCAL-00001" summary="hola">
+      <option name="closed" value="true" />
+      <created>1758889621019</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1758889621019</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="hola" />
+    <option name="LAST_COMMIT_MESSAGE" value="hola" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
