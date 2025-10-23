@@ -5,13 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27b06ab7-fbe4-4449-8daa-c4dfadfd5a3e" name="Changes" comment="hola">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/core.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Cercle.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Colors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Mides.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull_de_faltes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/CoolveticaHvComp.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/CoolveticaRgCond.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/NewakeFontDemo.otf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/logo2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Botons.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Fonts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Layout.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Mides.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Text_Field.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Recull_de_faltes.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Recull_de_faltes.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Cercle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Cercle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Colors.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Mides.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Recull_de_faltes.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,42 +39,49 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Mariona08"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Mariona08&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Mariona08/Recull-de-fsltes",
-    "accountId": "206ff952-1605-4b38-a283-c1c2f6abefc1"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Mariona08/Recull-de-fsltes&quot;,
+    &quot;accountId&quot;: &quot;206ff952-1605-4b38-a283-c1c2f6abefc1&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="33EjdYjEnaGNdxv9gzL2T4SUPVV" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Cercle.executor": "Run",
-    "Application.Colors.executor": "Run",
-    "Application.Recull_de_faltes.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "/Users/marionapedralssureda/IdeaProjects/Recull_de_faltes/src/Main.java",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Cercle.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Colors.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Recull_de_faltes.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;onboarding.tips.debug.path&quot;: &quot;/Users/marionapedralssureda/IdeaProjects/Recull_de_faltes/src/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/data" />
+      <recent name="$PROJECT_DIR$/Data/fonts" />
+      <recent name="$PROJECT_DIR$/Data" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -81,22 +99,40 @@
       <option name="project" value="LOCAL" />
       <updated>1758889621019</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="hola">
+      <option name="closed" value="true" />
+      <created>1758891459126</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1758891459126</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="0d528c02-0b07-411c-808c-c475ea180774" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="0d528c02-0b07-411c-808c-c475ea180774">
+          <value>
+            <State />
+          </value>
+        </entry>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="hola" />
     <option name="LAST_COMMIT_MESSAGE" value="hola" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>11</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
