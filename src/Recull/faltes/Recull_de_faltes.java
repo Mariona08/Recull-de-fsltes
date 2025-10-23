@@ -68,9 +68,6 @@ public class Recull_de_faltes extends PApplet {
         if(GUI.b1.mouseOverButton(this)){
             println("B1 has been pressed!!");
         }
-        if (GUI.b2.mouseOverButton(this)){
-            println("B2 has been pressed");
-        }
     }
 
 
