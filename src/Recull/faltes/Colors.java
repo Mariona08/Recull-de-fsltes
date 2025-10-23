@@ -13,11 +13,11 @@ public class Colors {
     // Estableix colors de l'App
     void setColors(PApplet p5){
         this.colors = new int[5];
-        this.colors[0] = p5.color(255); // Verd fosc
-        this.colors[1] = p5.color(0xFF556B2F); // Verd oliva
-        this.colors[2] = p5.color(0xFF6B8E23); // Verd molsa
-        this.colors[3] = p5.color(0xFFA9BA9D); // Verd sec
-        this.colors[4] = p5.color(0xFFDCE2C8); // Verd clar
+        this.colors[0] = p5.color(255);
+        this.colors[1] = p5.color(0xFF556B2F);
+        this.colors[2] = p5.color(0xFF6B8E23);
+        this.colors[3] = p5.color(0xFFA9BA9D);
+        this.colors[4] = p5.color(0xFFDCE2C8);
     }
 
     // Getter del número de colors

@@ -5,24 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27b06ab7-fbe4-4449-8daa-c4dfadfd5a3e" name="Changes" comment="hola">
-      <change afterPath="$PROJECT_DIR$/data/CoolveticaHvComp.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/CoolveticaRgCond.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/NewakeFontDemo.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/logo2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Botons.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Fonts.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Layout.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Mides.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Text_Field.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Cercle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Cercle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Colors.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Colors.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Mides.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Recull_de_faltes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +92,23 @@
       <option name="project" value="LOCAL" />
       <updated>1758891459126</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="hola">
+      <option name="closed" value="true" />
+      <created>1761199465920</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761199465920</updated>
+    </task>
+    <task id="LOCAL-00004" summary="hola">
+      <option name="closed" value="true" />
+      <created>1761199609083</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1761199609083</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

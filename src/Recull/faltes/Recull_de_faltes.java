@@ -61,13 +61,21 @@ public class Recull_de_faltes extends PApplet {
         else if(key=='1'){
             GUI.pantallaActual = GUI.PANTALLA.INICIAL;
         }
+        GUI.text1.keyPressed(key, keyCode);
+        GUI.text2.keyPressed(key, keyCode);
 
     }
 
     public void mousePressed(){
         if(GUI.b1.mouseOverButton(this)){
             println("B1 has been pressed!!");
+            GUI.pantallaActual = GUI.PANTALLA.INICIAL;
         }
+        if(GUI.b2.mouseOverButton(this)){
+            println("B2 has been pressed!!");
+        }
+        GUI.text1.isPressed(this);
+        GUI.text2.isPressed(this);
     }
 
 
