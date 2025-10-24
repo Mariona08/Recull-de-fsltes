@@ -72,7 +72,7 @@ public class Text_Field {
 
     // Afegeix la lletra c al final del text
     public void addText(char c) {
-        if (this.text.length() + 1 < w) {
+        if (this.text.length()  < 30) {
             this.text += c;
         }
     }
