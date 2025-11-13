@@ -41,9 +41,13 @@ public class Recull_de_faltes extends PApplet {
                 appGUI.dibujoPantallaLogIn(this);
                 break;
 
-            case INICIAL:
-                appGUI.dibujoPantallaInicial(this);
+            case HISTORIAL:
+                appGUI.dibujoPantallaHistorial(this);
                 break;
+
+            case FORMULARI:
+            appGUI.dibujoPantallaFormulari(this);
+            break;
         }
 
         // Mostra la paleta de colors
@@ -59,23 +63,54 @@ public class Recull_de_faltes extends PApplet {
             GUI.pantallaActual = GUI.PANTALLA.LOGIN;
         }
         else if(key=='1'){
-            GUI.pantallaActual = GUI.PANTALLA.INICIAL;
+            GUI.pantallaActual = GUI.PANTALLA.FORMULARI;
         }
-        GUI.text1.keyPressed(key, keyCode);
-        GUI.text2.keyPressed(key, keyCode);
+        else if(key=='2'){
+            GUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
+        }
+        if(GUI.pantallaActual==GUI.PANTALLA.LOGIN) {
+            GUI.text1.keyPressed(key, keyCode);
+            GUI.text2.keyPressed(key, keyCode);
+        }
+        if(GUI.pantallaActual==GUI.PANTALLA.FORMULARI) {
+            GUI.text3.keyPressed(key, keyCode);
+        }
 
     }
 
     public void mousePressed(){
         if(GUI.b1.mouseOverButton(this)){
             println("B1 has been pressed!!");
-            GUI.pantallaActual = GUI.PANTALLA.INICIAL;
+            GUI.pantallaActual = GUI.PANTALLA.FORMULARI;
         }
         if(GUI.b2.mouseOverButton(this)){
             println("B2 has been pressed!!");
         }
         GUI.text1.isPressed(this);
         GUI.text2.isPressed(this);
+        GUI.text3.isPressed(this);
+
+        if (GUI.s1.mouseOverSelect(this)) {
+            if (GUI.s1.isCollapsed()) {
+                GUI.s1.toggle();
+            } else {
+                GUI.s1.update(this);
+                GUI.s1.setCollapsed(true);
+                println("Seleccionado: " + GUI.s1.getSelectedValue());
+            }
+            if (GUI.s1.getSelectedValue().equals("Formulari")) {
+                GUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+            } else if (GUI.s1.getSelectedValue().equals("Historial")) {
+                GUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
+            } else if (GUI.s1.getSelectedValue().equals("Estadístiques")) {
+                GUI.pantallaActual = GUI.PANTALLA.ESTADISTIQUES;
+            }
+        }
+        } else {
+            GUI.s1.setCollapsed(true);
+        }
+
+
     }
 
 
