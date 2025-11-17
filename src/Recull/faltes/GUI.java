@@ -75,6 +75,14 @@ public class GUI {
 
     }
 
+    public void dibujoPantallaEstadistica(PApplet p5){
+        p5.background (colors.getColorAt(0));
+        logoPantallaHistorial(p5, logo2);
+
+    }
+
+
+
     //Zones de la GUI
 
     public static void logoLogIn(PApplet p5, PImage logo){

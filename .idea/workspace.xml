@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27b06ab7-fbe4-4449-8daa-c4dfadfd5a3e" name="Changes" comment="hola">
-      <change afterPath="$PROJECT_DIR$/data/casa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/PassField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Recull/faltes/Select.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Recull/faltes/Botons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Botons.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" afterDir="false" />
     </list>
@@ -128,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761319868630</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="hola">
+      <option name="closed" value="true" />
+      <created>1763023550765</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1763023550765</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

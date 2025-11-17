@@ -48,6 +48,9 @@ public class Recull_de_faltes extends PApplet {
             case FORMULARI:
             appGUI.dibujoPantallaFormulari(this);
             break;
+
+            case ESTADISTIQUES:
+            appGUI.dibujoPantallaEstadistica(this);
         }
 
         // Mostra la paleta de colors
@@ -106,7 +109,7 @@ public class Recull_de_faltes extends PApplet {
                 GUI.pantallaActual = GUI.PANTALLA.ESTADISTIQUES;
             }
         }
-        } else {
+        else {
             GUI.s1.setCollapsed(true);
         }
 
