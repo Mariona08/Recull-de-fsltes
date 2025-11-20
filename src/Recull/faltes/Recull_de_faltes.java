@@ -17,6 +17,16 @@ public class Recull_de_faltes extends PApplet {
     public void setup(){
         appFonts = new Fonts(this);
         appGUI = new GUI(this);
+
+        rb1 = new RadioButton(this, 180,75,15);
+        rb2 = new RadioButton(this, 180,175,15);
+        rb3 = new RadioButton(this, 180,275,15);
+
+        //Construcció del radio button group
+        rbg = new RadioButtonGroup(3);
+        rbg.setRadioButtons(rb1, rb2, rb3);   // Format pels 3 radio buttons
+        rbg.setSelected(2);
+
     }
 
     public void draw(){
@@ -36,7 +46,7 @@ public class Recull_de_faltes extends PApplet {
         text("Paragrafo de la App", 50,300);
 
         // Dibuixa la pantalla corresponent
-        switch(GUI.pantallaActual) {
+        switch(appGUI.pantallaActual) {
             case LOGIN:
                 appGUI.dibujoPantallaLogIn(this);
                 break;
@@ -63,35 +73,39 @@ public class Recull_de_faltes extends PApplet {
 
     public void keyPressed(){
         if(key=='0'){
-            GUI.pantallaActual = GUI.PANTALLA.LOGIN;
+            appGUI.pantallaActual = GUI.PANTALLA.LOGIN;
         }
         else if(key=='1'){
-            GUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+            appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
         }
         else if(key=='2'){
-            GUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
+            appGUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
         }
-        if(GUI.pantallaActual==GUI.PANTALLA.LOGIN) {
-            GUI.text1.keyPressed(key, keyCode);
-            GUI.text2.keyPressed(key, keyCode);
+        if(appGUI.pantallaActual==GUI.PANTALLA.LOGIN) {
+            appGUI.text1.keyPressed(key, keyCode);
+            appGUI.text2.keyPressed(key, keyCode);
         }
-        if(GUI.pantallaActual==GUI.PANTALLA.FORMULARI) {
-            GUI.text3.keyPressed(key, keyCode);
+        if(appGUI.pantallaActual== GUI.PANTALLA.FORMULARI) {
+            appGUI.text3.keyPressed(key, keyCode);
+            appGUI.text4.keyPressed(key, keyCode);
         }
 
     }
 
     public void mousePressed(){
-        if(GUI.b1.mouseOverButton(this)){
+        if(appGUI.b1.mouseOverButton(this)){
             println("B1 has been pressed!!");
-            GUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+            appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
         }
-        if(GUI.b2.mouseOverButton(this)){
+        if(appGUI.b2.mouseOverButton(this)){
             println("B2 has been pressed!!");
         }
+
+
         GUI.text1.isPressed(this);
         GUI.text2.isPressed(this);
         GUI.text3.isPressed(this);
+        GUI.text4.isPressed(this);
 
         if (GUI.s1.mouseOverSelect(this)) {
             if (GUI.s1.isCollapsed()) {
@@ -101,16 +115,16 @@ public class Recull_de_faltes extends PApplet {
                 GUI.s1.setCollapsed(true);
                 println("Seleccionado: " + GUI.s1.getSelectedValue());
             }
-            if (GUI.s1.getSelectedValue().equals("Formulari")) {
-                GUI.pantallaActual = GUI.PANTALLA.FORMULARI;
-            } else if (GUI.s1.getSelectedValue().equals("Historial")) {
-                GUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
-            } else if (GUI.s1.getSelectedValue().equals("Estadístiques")) {
-                GUI.pantallaActual = GUI.PANTALLA.ESTADISTIQUES;
+            if (appGUI.s1.getSelectedValue().equals("Formulari")) {
+                appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+            } else if (appGUI.s1.getSelectedValue().equals("Historial")) {
+                appGUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
+            } else if (appGUI.s1.getSelectedValue().equals("Estadístiques")) {
+                appGUI.pantallaActual = GUI.PANTALLA.ESTADISTIQUES;
             }
         }
         else {
-            GUI.s1.setCollapsed(true);
+            appGUI.s1.setCollapsed(true);
         }
 
 
