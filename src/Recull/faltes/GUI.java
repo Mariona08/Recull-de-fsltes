@@ -33,7 +33,17 @@ public class GUI {
     public String[]SelectValues1 = {"Formulari", "Historial", "Estadístiques"};
     public static Select s1;
 
-   // public RadioButton rb1, rb2;           // Radio buttons
+    // Variables radio buttons
+    RadioButton rb1, rb2, rb3, rb4, rb5, rb6, rb7;
+
+    // Variable radio button group
+    RadioButtonGroup rbg1, rbg2;
+
+    // Variables del color (RGB)
+    float r, g, b;
+
+
+    // public RadioButton rb1, rb2;           // Radio buttons
    // public RadioButtonGroup rbGroup;
 
     public GUI(PApplet p5){
@@ -53,7 +63,7 @@ public class GUI {
         text1 = new PassField(p5, p5.width/2-200, p5.height/2+145, 400,50);
         text2 = new Text_Field(p5, p5.width/2-200, p5.height/2+70, 400,50);
         text3 = new Text_Field(p5, p5.width/2-550, p5.height/2-300, 200,40);
-        text4 = new Text_Field(p5, p5.width/2-345, p5.height/2-300, 200,40);
+        text4 = new Text_Field(p5, p5.width/2-550, p5.height/2-200, 200,40);
         s1 = new Select(SelectValues1, p5.width/2+425, p5.height/2-390,200,50);
        // rb1 = new RadioButton(100, 100, 15, "Opció 1");
        // rb2 = new RadioButton(100, 130, 15, "Opció 2");
@@ -83,7 +93,22 @@ public class GUI {
         tableHistorial.setColumnWidths(new float[]{20, 30, 20, 30});
 
 
-        //posar es tres i es de grup; seter amb es tres nom; i fer set select
+        rb1 = new RadioButton(p5, p5.width/2,355,15);
+        rb2 = new RadioButton(p5, 100,355,15);
+        rb3 = new RadioButton(p5, 100,425,15);
+        rb4 = new RadioButton(p5, p5.width/2,425,15);
+        rb5 = new RadioButton(p5, 100,550,15);
+        rb6 = new RadioButton(p5, p5.width/2,550,15);
+        rb7 = new RadioButton(p5, 100,620,15);
+
+        //Construcció del radio button group
+        rbg1 = new RadioButtonGroup(4);
+        rbg1.setRadioButtons(rb1, rb2, rb3, rb4);   // Format pels 3 radio buttons
+        rbg1.setSelected(2);
+
+        rbg2 = new RadioButtonGroup(3);
+        rbg2.setRadioButtons(rb5, rb6, rb7);   // Format pels 3 radio buttons
+        rbg2.setSelected(2);
 
 
     }
@@ -111,10 +136,32 @@ public class GUI {
         p5.textSize(15);
         p5.text("Nom medicament", p5.width/2-550, p5.height/2-310);
         p5.textSize(15);
-        p5.text("Codi", p5.width/2-345, p5.height/2-310);
+        p5.text("Codi", p5.width/2-550, p5.height/2-210);
         text3.display(p5);
         text4.display(p5);
         s1.display(p5);
+        rb1.display(p5);
+        rb2.display(p5);
+        rb3.display(p5);
+        rb4.display(p5);
+        rb5.display(p5);
+        rb6.display(p5);
+        rb7.display(p5);
+        p5.textSize(20);
+        p5.text("Problema subministrament", p5.width/2+20,361);
+        p5.textSize(20);
+        p5.text("Article nou", p5.width/2-520, 361);
+        p5.textSize(20);
+        p5.text("Article comanda externa", p5.width/2-520, 431);
+        p5.textSize(20);
+        p5.text("Trencament estoc", p5.width/2+20, 431);
+        p5.textSize(20);
+        p5.text("Substitució", p5.width/2+20,556);
+        p5.textSize(20);
+        p5.text("Demanat encàrrec", p5.width/2-520, 556);
+        p5.textSize(20);
+        p5.text("Res", p5.width/2-520, 626);
+
 
     }
 

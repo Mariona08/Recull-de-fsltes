@@ -1,10 +1,11 @@
 package Recull.faltes;
 import processing.core.PApplet;
 
-public class Recull_de_faltes extends PApplet {
+public class  Recull_de_faltes extends PApplet {
 
     Fonts appFonts;
     GUI appGUI;
+
 
 
     public static void main(String[] args) {
@@ -17,15 +18,6 @@ public class Recull_de_faltes extends PApplet {
     public void setup(){
         appFonts = new Fonts(this);
         appGUI = new GUI(this);
-
-        rb1 = new RadioButton(this, 180,75,15);
-        rb2 = new RadioButton(this, 180,175,15);
-        rb3 = new RadioButton(this, 180,275,15);
-
-        //Construcció del radio button group
-        rbg = new RadioButtonGroup(3);
-        rbg.setRadioButtons(rb1, rb2, rb3);   // Format pels 3 radio buttons
-        rbg.setSelected(2);
 
     }
 
@@ -126,6 +118,23 @@ public class Recull_de_faltes extends PApplet {
         else {
             appGUI.s1.setCollapsed(true);
         }
+
+        // Si pitjam sobre el radiobuttongroup
+        appGUI.rbg1.updateOnClick(this);
+
+        // Miram el seu valor, per actualitzar r,g i b
+        appGUI.r = appGUI.rb1.isChecked() ? 255 : 0;
+        appGUI.g = appGUI.rb2.isChecked() ? 255 : 0;
+        appGUI.b = appGUI.rb3.isChecked() ? 255 : 0;
+        appGUI.b = appGUI.rb4.isChecked() ? 255 : 0;
+
+
+        appGUI.rbg2.updateOnClick(this);
+
+        // Miram el seu valor, per actualitzar r,g i b
+        appGUI.r = appGUI.rb5.isChecked() ? 255 : 0;
+        appGUI.g = appGUI.rb6.isChecked() ? 255 : 0;
+        appGUI.b = appGUI.rb7.isChecked() ? 255 : 0;
 
 
     }
