@@ -26,8 +26,40 @@ public class GUI {
     //Text Field
     public static Text_Field text1, text2, text3, text4;
 
+
+
+    // Dimensions dels botons
     float buttonW = 60, buttonH = 60;
+
+    // Taula Paginada
+    PagedTable t;
+
+    // Dimensions de la taula
     float tableW = 800, tableH = 300;
+
+    // Número de files (capçalera inclosa) i columnes de la taula
+    int files = 15, columnes = 4;
+
+    // Títols de les columnes
+    String[] headers = {"Nom de la persona", "  ", "  ","  "};
+
+    // Amplades de les columnes
+    float[] colWidths = {20, 40, 40, 20};
+
+    // Dades de la taula
+    String[][] info = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
 
     //Select
     public String[]SelectValues1 = {"Formulari", "Historial", "Estadístiques"};
@@ -57,41 +89,13 @@ public class GUI {
         b1 = new Botons(p5,"Login", p5.width/2-200,p5.height/2+200,400,50);
         b2 = new Botons(p5,"envia", p5.width/2-200,p5.height/2+300,400,50);
         //b3 = new Botons(p5,casa, p5.width/2, p5.height/2,50,50);
-        btable1 = new Botons(p5,"NEXT", 25+ tableW/2 + buttonW/1.5f,tableH+80,400,50);
-        btable2 = new Botons(p5,"PREV", p5.width/2-200,p5.height/2+300,400,50);
+
 
         text1 = new PassField(p5, p5.width/2-200, p5.height/2+145, 400,50);
         text2 = new Text_Field(p5, p5.width/2-200, p5.height/2+70, 400,50);
         text3 = new Text_Field(p5, p5.width/2-550, p5.height/2-300, 200,40);
         text4 = new Text_Field(p5, p5.width/2-550, p5.height/2-200, 200,40);
         s1 = new Select(SelectValues1, p5.width/2+425, p5.height/2-390,200,50);
-       // rb1 = new RadioButton(100, 100, 15, "Opció 1");
-       // rb2 = new RadioButton(100, 130, 15, "Opció 2");
-       // rbGroup = new RadioButtonGroup(2);
-      //  rbGroup.setRadioButtons(rb1, rb2);
-       // RadioButtonGroup group = new RadioButtonGroup(2);
-       // group.setRadioButtons(rb1, rb2);
-        tableHistorial = new PagedTable(10, 4);
-        tableHistorial.setHeaders(new String[]{
-                "Medicament", "Secció", "Data", "Motiu"
-        });
-        String[][] dades = {
-                {"Medicament", "Secció", "Data", "Motiu"},
-                {"Medicament", "Secció", "Data", "Motiu"},
-                {"Medicament", "Secció", "Data", "Motiu"},
-                {"Medicament", "Secció", "Data", "Motiu"},
-                {"Medicament", "Secció", "Data", "Motiu"},
-                {"Medicament", "Secció", "Data", "Motiu"}
-        };
-        tableHistorial.setColumnWidths(new float[]{
-                25, 25, 25, 25
-        });
-
-        tableHistorial.setData(dades);
-
-        // Amplades de cada columna (%)
-        tableHistorial.setColumnWidths(new float[]{20, 30, 20, 30});
-
 
         rb1 = new RadioButton(p5, p5.width/2,355,15);
         rb2 = new RadioButton(p5, 100,355,15);
@@ -109,6 +113,16 @@ public class GUI {
         rbg2 = new RadioButtonGroup(3);
         rbg2.setRadioButtons(rb5, rb6, rb7);   // Format pels 3 radio buttons
         rbg2.setSelected(2);
+
+        t = new PagedTable(files, columnes);
+        t.setHeaders(headers);
+        t.setData(info);
+        t.setColumnWidths(colWidths);
+
+        // Creació dels botons
+        btable1 = new Botons(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, tableH + 80, buttonW, buttonH);
+        btable2 = new Botons(p5, "PREV", 25 + tableW/2 - buttonW/1.5f, tableH + 80, buttonW, buttonH);
+
 
 
     }
@@ -148,19 +162,19 @@ public class GUI {
         rb6.display(p5);
         rb7.display(p5);
         p5.textSize(20);
-        p5.text("Problema subministrament", p5.width/2+20,361);
+        p5.text("Problema subministrament", p5.width/2+25,361);
         p5.textSize(20);
-        p5.text("Article nou", p5.width/2-520, 361);
+        p5.text("Article nou", p5.width/2-515, 361);
         p5.textSize(20);
-        p5.text("Article comanda externa", p5.width/2-520, 431);
+        p5.text("Article comanda externa", p5.width/2-515, 431);
         p5.textSize(20);
-        p5.text("Trencament estoc", p5.width/2+20, 431);
+        p5.text("Trencament estoc", p5.width/2+25, 431);
         p5.textSize(20);
-        p5.text("Substitució", p5.width/2+20,556);
+        p5.text("Substitució", p5.width/2+25,556);
         p5.textSize(20);
-        p5.text("Demanat encàrrec", p5.width/2-520, 556);
+        p5.text("Demanat encàrrec", p5.width/2-515, 556);
         p5.textSize(20);
-        p5.text("Res", p5.width/2-520, 626);
+        p5.text("Res", p5.width/2-515, 626);
 
 
     }
@@ -169,14 +183,13 @@ public class GUI {
         p5.background (colors.getColorAt(0));
         logoPantallaHistorial(p5, logo2);
         s1.display(p5);
-        tableHistorial.display(p5,
-                p5.width/2 - 620,   // x
-                p5.height/2 - 200,  // y
-                800,                // amplada
-                500                 // alçada
-        );
 
+        // Dibuixa la Table
+        t.display(p5, 50, 50, tableW, tableH);
 
+        // Dibuixa els botons
+        btable1.display(p5);
+        btable2.display(p5);
     }
 
     public void dibujoPantallaEstadistica(PApplet p5){
@@ -198,6 +211,8 @@ public class GUI {
     public static void logoPantallaHistorial(PApplet p5, PImage logo2){
         p5.imageMode(PConstants.CENTER);
         p5.image(logo2, p5.width/2-550, p5.height/2-370, logo2.width*0.25f, logo2.height*0.25f);
+
+
 
     }
     //public static void casaPantallaHistorial(PApplet p5, PImage casa){

@@ -5,6 +5,7 @@ public class  Recull_de_faltes extends PApplet {
 
     Fonts appFonts;
     GUI appGUI;
+    PagedTable appPagedTable;
 
 
 
@@ -82,6 +83,13 @@ public class  Recull_de_faltes extends PApplet {
             appGUI.text4.keyPressed(key, keyCode);
         }
 
+        if(keyCode==LEFT){
+            appPagedTable.prevPage();
+        }
+        else if(keyCode==RIGHT){
+            appPagedTable.nextPage();
+        }
+
     }
 
     public void mousePressed(){
@@ -135,6 +143,13 @@ public class  Recull_de_faltes extends PApplet {
         appGUI.r = appGUI.rb5.isChecked() ? 255 : 0;
         appGUI.g = appGUI.rb6.isChecked() ? 255 : 0;
         appGUI.b = appGUI.rb7.isChecked() ? 255 : 0;
+
+        if(appGUI.btable1.mouseOverButton(this) && appGUI.btable1.isEnabled()){
+            appPagedTable.nextPage();
+        }
+        else if(appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()){
+            appPagedTable.prevPage();
+        }
 
 
     }
