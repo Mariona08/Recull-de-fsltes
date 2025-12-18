@@ -18,7 +18,7 @@ public class GUI {
     public Botons b1, b2, b3, btable1, btable2;
 
     //Enumerat de les pantalles de l'app
-    public enum PANTALLA {LOGIN, FORMULARI, HISTORIAL, ESTADISTIQUES, RECOMANATS};
+    public enum PANTALLA {LOGIN, FORMULARI, HISTORIAL, ESTADISTIQUES, COMANDA};
 
     //Pantalla actual
     public PANTALLA pantallaActual;
@@ -31,7 +31,9 @@ public class GUI {
     float buttonW = 60, buttonH = 60;
 
     // Taula Paginada
-    PagedTable t;
+    PagedTable t, t1, t2, t3, t4, t5, t6, t7;
+
+    public int taulaActiva = -1;
 
     // Dimensions de la taula
     float tableW = 800, tableH = 300;
@@ -79,9 +81,159 @@ public class GUI {
             {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
     };
 
+    String[][] info1 = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
+    String[][] info2 = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
+    String[][] info3 = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
+    String[][] info4 = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
+    String[][] info5 = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
+    String[][] info6 = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
+    String[][] info7 = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+    };
+
+
+
+
+
 
     //Select
-    public String[]SelectValues1 = {"Formulari", "Historial", "Estadístiques"};
+    public String[]SelectValues1 = {"Formulari", "Historial", "Estadístiques", "Comanda"};
     public static Select s1;
 
     // Variables radio buttons
@@ -151,6 +303,41 @@ public class GUI {
         t.setData(info);
         t.setColumnWidths(colWidths);
 
+        t1 = new PagedTable(files, columnes);
+        t1.setHeaders(headers);
+        t1.setData(info1);
+        t1.setColumnWidths(colWidths);
+
+        t2 = new PagedTable(files, columnes);
+        t2.setHeaders(headers);
+        t2.setData(info2);
+        t2.setColumnWidths(colWidths);
+
+        t3 = new PagedTable(files, columnes);
+        t3.setHeaders(headers);
+        t3.setData(info3);
+        t3.setColumnWidths(colWidths);
+
+        t4 = new PagedTable(files, columnes);
+        t4.setHeaders(headers);
+        t4.setData(info4);
+        t4.setColumnWidths(colWidths);
+
+        t5 = new PagedTable(files, columnes);
+        t5.setHeaders(headers);
+        t5.setData(info5);
+        t5.setColumnWidths(colWidths);
+
+        t6 = new PagedTable(files, columnes);
+        t6.setHeaders(headers);
+        t6.setData(info6);
+        t6.setColumnWidths(colWidths);
+
+        t7 = new PagedTable(files, columnes);
+        t7.setHeaders(headers);
+        t7.setData(info7);
+        t7.setColumnWidths(colWidths);
+
         // Creació dels botons
         btable1 = new Botons(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, 720, buttonW, buttonH);
         btable2 = new Botons(p5, "PREV", 25 + tableW/2 - buttonW/1.5f, 720, buttonW, buttonH);
@@ -211,19 +398,12 @@ public class GUI {
 
     }
 
-    public void dibujoPantallaHistorial(PApplet p5){
-        p5.background (colors.getColorAt(0));
+    public void dibujoPantallaHistorial(PApplet p5) {
+        p5.background(colors.getColorAt(0));
         logoPantallaHistorial(p5, logo2);
         s1.display(p5);
 
-        // Dibuixa la Table
-        t.display(p5, 50, 400, tableW, tableH);
-
-        // Dibuixa els botons
-        btable1.display(p5);
-        btable2.display(p5);
-
-
+        // Dibuixem tots els radio buttons
         rb8.display(p5);
         rb9.display(p5);
         rb10.display(p5);
@@ -233,25 +413,45 @@ public class GUI {
         rb14.display(p5);
         rb15.display(p5);
 
-        p5.text("Farmacèutic",  120,162);
         p5.textSize(20);
-        p5.text("Farmacèutic", 420,162);
-        p5.textSize(20);
-        p5.text("Farmacèutic", 720,162);
-        p5.textSize(20);
-        p5.text("Tècnic", 1020,162);
-        p5.textSize(20);
-        p5.text("Tècnic", 120,262);
-        p5.textSize(20);
-        p5.text("Tècnic", 420,262);
-        p5.textSize(20);
-        p5.text("Tècnic", 720,262);
-        p5.textSize(20);
-        p5.text("Tècnic", 1020,262);
-        p5.textSize(20);
+        p5.text("Farmacèutic", 120, 162);
+        p5.text("Farmacèutic", 420, 162);
+        p5.text("Farmacèutic", 720, 162);
+        p5.text("Tècnic", 1020, 162);
+        p5.text("Tècnic", 120, 262);
+        p5.text("Tècnic", 420, 262);
+        p5.text("Tècnic", 720, 262);
+        p5.text("Tècnic", 1020, 262);
 
+        // Només dibuixem la taula i els botons si hi ha taula activa
+        if (taulaActiva != -1) {
+
+            switch (taulaActiva) {
+                case 0: t.display(p5, 100, 350, tableW, tableH); break;
+                case 1: t1.display(p5, 100, 350, tableW, tableH); break;
+                case 2: t2.display(p5, 100, 350, tableW, tableH); break;
+                case 3: t3.display(p5, 100, 350, tableW, tableH); break;
+                case 4: t4.display(p5, 100, 350, tableW, tableH); break;
+                case 5: t5.display(p5, 100, 350, tableW, tableH); break;
+                case 6: t6.display(p5, 100, 350, tableW, tableH); break;
+                case 7: t7.display(p5, 100, 350, tableW, tableH); break;
+            }
+
+            // Mostrem els botons NEXT / PREV només si hi ha taula activa
+            btable1.display(p5);
+            btable2.display(p5);
+        }
+
+        s1.display(p5);
+    }
+
+    public void dibujoPantallaComanda(PApplet p5){
+        p5.background(colors.getColorAt(0));
+        logoPantallaHistorial(p5, logo2); // Pots posar el logo que vulguis
+        s1.display(p5); // Si vols mantenir el Select
 
     }
+
 
     public void dibujoPantallaEstadistica(PApplet p5){
         p5.background (colors.getColorAt(0));
