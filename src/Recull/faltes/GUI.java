@@ -27,7 +27,6 @@ public class GUI {
     public static Text_Field text1, text2, text3, text4;
 
 
-
     // Dimensions dels botons
     float buttonW = 60, buttonH = 60;
 
@@ -38,16 +37,36 @@ public class GUI {
     float tableW = 800, tableH = 300;
 
     // Número de files (capçalera inclosa) i columnes de la taula
-    int files = 15, columnes = 4;
+    int files = 8, columnes = 4;
 
     // Títols de les columnes
-    String[] headers = {"Nom de la persona", "  ", "  ","  "};
+    String[] headers = {"Data", " Medicament ", "Causa de falta","Resolució"};
 
     // Amplades de les columnes
-    float[] colWidths = {20, 40, 40, 20};
+    float[] colWidths = {20, 30, 30, 20};
 
     // Dades de la taula
     String[][] info = {
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
+            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
             {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
             {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
             {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
@@ -66,10 +85,10 @@ public class GUI {
     public static Select s1;
 
     // Variables radio buttons
-    RadioButton rb1, rb2, rb3, rb4, rb5, rb6, rb7;
+    RadioButton rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8,rb9, rb10, rb11, rb12, rb13, rb14, rb15;
 
     // Variable radio button group
-    RadioButtonGroup rbg1, rbg2;
+    RadioButtonGroup rbg1, rbg2, rbg3;
 
     // Variables del color (RGB)
     float r, g, b;
@@ -104,6 +123,15 @@ public class GUI {
         rb5 = new RadioButton(p5, 100,550,15);
         rb6 = new RadioButton(p5, p5.width/2,550,15);
         rb7 = new RadioButton(p5, 100,620,15);
+        rb8 = new RadioButton(p5, 100,155,10);
+        rb9 = new RadioButton(p5, 400,155,10);
+        rb10 = new RadioButton(p5, 700,155,10);
+        rb11 = new RadioButton(p5, 1000,155,10);
+        rb12 = new RadioButton(p5, 100,255,10);
+        rb13 = new RadioButton(p5, 400,255,10);
+        rb14 = new RadioButton(p5, 700,255,10);
+        rb15 = new RadioButton(p5, 1000,255,10);
+
 
         //Construcció del radio button group
         rbg1 = new RadioButtonGroup(4);
@@ -114,14 +142,18 @@ public class GUI {
         rbg2.setRadioButtons(rb5, rb6, rb7);   // Format pels 3 radio buttons
         rbg2.setSelected(2);
 
+        rbg3 = new RadioButtonGroup(8);
+        rbg3.setRadioButtons(rb8, rb9, rb10, rb11, rb12, rb13, rb14, rb15);   // Format pels 3 radio buttons
+        rbg3.setSelected(2);
+
         t = new PagedTable(files, columnes);
         t.setHeaders(headers);
         t.setData(info);
         t.setColumnWidths(colWidths);
 
         // Creació dels botons
-        btable1 = new Botons(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, tableH + 80, buttonW, buttonH);
-        btable2 = new Botons(p5, "PREV", 25 + tableW/2 - buttonW/1.5f, tableH + 80, buttonW, buttonH);
+        btable1 = new Botons(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, 720, buttonW, buttonH);
+        btable2 = new Botons(p5, "PREV", 25 + tableW/2 - buttonW/1.5f, 720, buttonW, buttonH);
 
 
 
@@ -185,11 +217,40 @@ public class GUI {
         s1.display(p5);
 
         // Dibuixa la Table
-        t.display(p5, 50, 50, tableW, tableH);
+        t.display(p5, 50, 400, tableW, tableH);
 
         // Dibuixa els botons
         btable1.display(p5);
         btable2.display(p5);
+
+
+        rb8.display(p5);
+        rb9.display(p5);
+        rb10.display(p5);
+        rb11.display(p5);
+        rb12.display(p5);
+        rb13.display(p5);
+        rb14.display(p5);
+        rb15.display(p5);
+
+        p5.text("Farmacèutic",  120,162);
+        p5.textSize(20);
+        p5.text("Farmacèutic", 420,162);
+        p5.textSize(20);
+        p5.text("Farmacèutic", 720,162);
+        p5.textSize(20);
+        p5.text("Tècnic", 1020,162);
+        p5.textSize(20);
+        p5.text("Tècnic", 120,262);
+        p5.textSize(20);
+        p5.text("Tècnic", 420,262);
+        p5.textSize(20);
+        p5.text("Tècnic", 720,262);
+        p5.textSize(20);
+        p5.text("Tècnic", 1020,262);
+        p5.textSize(20);
+
+
     }
 
     public void dibujoPantallaEstadistica(PApplet p5){

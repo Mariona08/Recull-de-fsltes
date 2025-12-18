@@ -138,6 +138,7 @@ public class  Recull_de_faltes extends PApplet {
 
 
         appGUI.rbg2.updateOnClick(this);
+        appGUI.rbg3.updateOnClick(this);
 
         // Miram el seu valor, per actualitzar r,g i b
         appGUI.r = appGUI.rb5.isChecked() ? 255 : 0;
@@ -145,12 +146,11 @@ public class  Recull_de_faltes extends PApplet {
         appGUI.b = appGUI.rb7.isChecked() ? 255 : 0;
 
         if(appGUI.btable1.mouseOverButton(this) && appGUI.btable1.isEnabled()){
-            appPagedTable.nextPage();
+            appGUI.t.nextPage();
         }
         else if(appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()){
-            appPagedTable.prevPage();
+            appGUI.t.prevPage();
         }
-
 
     }
 
