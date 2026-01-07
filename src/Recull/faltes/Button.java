@@ -2,9 +2,8 @@ package Recull.faltes;
 
 import processing.core.PApplet;
 import processing.core.PImage;
-import processing.core.PShape;
 
-public class Botons {
+public class Button {
     // Propietats d'un botó:
 
     PImage image;
@@ -15,7 +14,7 @@ public class Botons {
     public boolean enabled;  // Estat del botó (actiu / inactiu).
     Colors colors;
     // Constructor
-    public Botons(PApplet p5, String text, float x, float y, float w, float h){
+    public Button(PApplet p5, String text, float x, float y, float w, float h){
         colors = new Colors(p5);
         this.textBoto = text;
         this.x = x;
@@ -29,7 +28,7 @@ public class Botons {
         this.strokeColor = p5.color(0);
     }
 
-    public Botons(PApplet p5,PImage image, float x, float y, float w, float h) {
+    public Button(PApplet p5, PImage image, float x, float y, float w, float h) {
         colors = new Colors(p5);
         this.image = image;
         this.x = x;

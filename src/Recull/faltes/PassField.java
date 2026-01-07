@@ -2,7 +2,7 @@ package Recull.faltes;
 
 import processing.core.PApplet;
 
-public class PassField extends Text_Field{
+public class PassField extends TextField {
 
     public PassField(PApplet p5, int x, int y, int w, int h) {
         super(p5, x, y, w, h);

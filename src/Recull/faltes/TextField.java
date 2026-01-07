@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 import static processing.core.PConstants.BACKSPACE;
 
-public class Text_Field {
+public class TextField {
 
     //Propietats del camp de text
     int x, y, h, w;
@@ -19,7 +19,7 @@ public class Text_Field {
     boolean selected = false;
     //Constructor
     //*constructor dels colors
-    public Text_Field(PApplet p5, int x, int y, int w, int h) {
+    public TextField(PApplet p5, int x, int y, int w, int h) {
         this.x = x;
         this.y = y;
         this.w = w;

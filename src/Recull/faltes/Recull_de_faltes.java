@@ -19,6 +19,11 @@ public class  Recull_de_faltes extends PApplet {
     public void setup(){
         appFonts = new Fonts(this);
         appGUI = new GUI(this);
+        // Creació de la Llista de Textos
+        appGUI.tList = new TextList1D(this, appGUI.listValues, 50, 100, 300, 40);
+
+        // Creació del Botó
+        appGUI.btl = new Button(this, "TRIA", 950, 100, 300, 40);
 
     }
 
@@ -58,15 +63,38 @@ public class  Recull_de_faltes extends PApplet {
 
             case COMANDA:
             appGUI.dibujoPantallaComanda(this);
+            appGUI.tList.update(this);
+
             break;
+
         }
 
         // Mostra la paleta de colors
         //appPaleta.displayPaleta(this, 100,100,width-200);
         appFonts.displayTipografia(this, 100,400,500);
 
+
+        // Actualitza el cursor
+        updateCursor(this);
+
+        // Mostra la informació seleccionada
+        if(appGUI.selectedText!=null){
+            pushStyle();
+            textAlign(CENTER); fill(0);
+            text(appGUI.selectedText, width/2, height/2);
+            popStyle();
+        }
+
     }
 
+    void updateCursor(PApplet p5){
+        if( appGUI.btl.mouseOverButton(p5) || appGUI.tList.mouseOverButtons(p5)){
+            cursor(HAND);
+        }
+        else {
+            cursor(ARROW);
+        }
+    }
     //KEYBOARD interaction
 
     public void keyPressed(){
@@ -97,6 +125,11 @@ public class  Recull_de_faltes extends PApplet {
         }
         else if(keyCode==RIGHT){
             appPagedTable.nextPage();
+        }
+
+        if(appGUI.tList.getTextField().mouseOverTextField(this)){
+            appGUI.tList.getTextField().keyPressed(key, (int)keyCode);
+            appGUI.tList.update(this);
         }
 
     }
@@ -211,5 +244,20 @@ public class  Recull_de_faltes extends PApplet {
                 appGUI.t7.prevPage();
             }
         }
+
+        if(appGUI.pantallaActual == GUI.PANTALLA.COMANDA){
+
+            // clicar dins el camp de text
+            appGUI.tList.getTextField().isPressed(this);
+
+            // clicar una opció de la llista
+            appGUI.tList.buttonPressed(this);
+
+            // botó TRIA
+            if(appGUI.btl.mouseOverButton(this) && appGUI.btl.isEnabled()){
+                appGUI.selectedText = appGUI.tList.getSelectedValue();
+            }
+        }
     }
+
 }

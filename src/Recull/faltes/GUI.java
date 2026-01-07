@@ -4,6 +4,9 @@ import static Recull.faltes.Mides.*;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
+import Recull.faltes.Button;
+import Recull.faltes.TextList1D;
+import processing.core.PApplet;
 
 
 public class GUI {
@@ -14,8 +17,8 @@ public class GUI {
 
     public PagedTable tableHistorial;
 
-    //Botons
-    public Botons b1, b2, b3, btable1, btable2;
+    //Button
+    public Button b1, b2, b3, btable1, btable2;
 
     //Enumerat de les pantalles de l'app
     public enum PANTALLA {LOGIN, FORMULARI, HISTORIAL, ESTADISTIQUES, COMANDA};
@@ -24,14 +27,14 @@ public class GUI {
     public PANTALLA pantallaActual;
 
     //Text Field
-    public static Text_Field text1, text2, text3, text4;
+    public static TextField text1, text2, text3, text4;
 
 
     // Dimensions dels botons
     float buttonW = 60, buttonH = 60;
 
     // Taula Paginada
-    PagedTable t, t1, t2, t3, t4, t5, t6, t7;
+    PagedTable t, t1, t2, t3, t4, t5, t6, t7, tc1, tc2, tc3;
 
     public int taulaActiva = -1;
 
@@ -41,11 +44,15 @@ public class GUI {
     // Número de files (capçalera inclosa) i columnes de la taula
     int files = 8, columnes = 4;
 
+    int files1 = 4, columnes1 = 2;
+
     // Títols de les columnes
     String[] headers = {"Data", " Medicament ", "Causa de falta","Resolució"};
+    String[] headers1 = {"Data", " Medicament "};
 
     // Amplades de les columnes
     float[] colWidths = {20, 30, 30, 20};
+    float[] colWidths1 = {20, 80};
 
     // Dades de la taula
     String[][] info = {
@@ -227,6 +234,45 @@ public class GUI {
             {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
     };
 
+    String[][] infoc1 = {
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+    };
+
+    String[][] infoc2 = {
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+    };
+
+    String[][] infoc3 = {
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+    };
+
 
 
 
@@ -245,6 +291,16 @@ public class GUI {
     // Variables del color (RGB)
     float r, g, b;
 
+    // Elements de la Interfície Gràfica (TextList)
+    TextList1D tList;   // Llista de textos
+    Button btl;         // Botons
+
+    String[] listValues = {"Alemania", "Angola", "Canada", "Brasil"};
+    String selectedText;
+
+    // Dimensions del TextList i Botons
+    float tListW = 600, tListH = 60;
+    float buttonW1 = 120, buttonH1 = 60;
 
     // public RadioButton rb1, rb2;           // Radio buttons
    // public RadioButtonGroup rbGroup;
@@ -257,15 +313,15 @@ public class GUI {
         logo = p5.loadImage("data/logo.png");
         logo2 = p5.loadImage("data/logo2.png");
         //casa = p5.loadImage("data/casa.png");
-        b1 = new Botons(p5,"Login", p5.width/2-200,p5.height/2+200,400,50);
-        b2 = new Botons(p5,"envia", p5.width/2-200,p5.height/2+300,400,50);
-        //b3 = new Botons(p5,casa, p5.width/2, p5.height/2,50,50);
+        b1 = new Button(p5,"Login", p5.width/2-200,p5.height/2+200,400,50);
+        b2 = new Button(p5,"envia", p5.width/2-200,p5.height/2+300,400,50);
+        //b3 = new Button(p5,casa, p5.width/2, p5.height/2,50,50);
 
 
         text1 = new PassField(p5, p5.width/2-200, p5.height/2+145, 400,50);
-        text2 = new Text_Field(p5, p5.width/2-200, p5.height/2+70, 400,50);
-        text3 = new Text_Field(p5, p5.width/2-550, p5.height/2-300, 200,40);
-        text4 = new Text_Field(p5, p5.width/2-550, p5.height/2-200, 200,40);
+        text2 = new TextField(p5, p5.width/2-200, p5.height/2+70, 400,50);
+        text3 = new TextField(p5, p5.width/2-550, p5.height/2-300, 200,40);
+        text4 = new TextField(p5, p5.width/2-550, p5.height/2-200, 200,40);
         s1 = new Select(SelectValues1, p5.width/2+425, p5.height/2-390,200,50);
 
         rb1 = new RadioButton(p5, p5.width/2,355,15);
@@ -338,9 +394,24 @@ public class GUI {
         t7.setData(info7);
         t7.setColumnWidths(colWidths);
 
+        tc1 = new PagedTable(files1, columnes1);
+        tc1.setHeaders(headers1);
+        tc1.setData(infoc1);
+        tc1.setColumnWidths(colWidths1);
+
+        tc2 = new PagedTable(files1, columnes1);
+        tc2.setHeaders(headers1);
+        tc2.setData(infoc2);
+        tc2.setColumnWidths(colWidths1);
+
+        tc3 = new PagedTable(files1, columnes1);
+        tc3.setHeaders(headers1);
+        tc3.setData(infoc3);
+        tc3.setColumnWidths(colWidths1);
+
         // Creació dels botons
-        btable1 = new Botons(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, 720, buttonW, buttonH);
-        btable2 = new Botons(p5, "PREV", 25 + tableW/2 - buttonW/1.5f, 720, buttonW, buttonH);
+        btable1 = new Button(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, 720, buttonW, buttonH);
+        btable2 = new Button(p5, "PREV", 25 + tableW/2 - buttonW/1.5f, 720, buttonW, buttonH);
 
 
 
@@ -447,8 +518,16 @@ public class GUI {
 
     public void dibujoPantallaComanda(PApplet p5){
         p5.background(colors.getColorAt(0));
-        logoPantallaHistorial(p5, logo2); // Pots posar el logo que vulguis
-        s1.display(p5); // Si vols mantenir el Select
+        logoPantallaHistorial(p5, logo2); //logo
+        s1.display(p5); //Select
+
+
+
+        btable1.display(p5);
+        btable2.display(p5);
+
+        tList.display(p5);
+        btl.display(p5);
 
     }
 
