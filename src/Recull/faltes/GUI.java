@@ -4,9 +4,6 @@ import static Recull.faltes.Mides.*;
 import processing.core.PApplet;
 import processing.core.PConstants;
 import processing.core.PImage;
-import Recull.faltes.Button;
-import Recull.faltes.TextList1D;
-import processing.core.PApplet;
 
 
 public class GUI {
@@ -34,7 +31,7 @@ public class GUI {
     float buttonW = 60, buttonH = 60;
 
     // Taula Paginada
-    PagedTable t, t1, t2, t3, t4, t5, t6, t7, tc1, tc2, tc3;
+    PagedTable t, t1, t2, t3, t4, t5, t6, t7, tcomanda;
 
     public int taulaActiva = -1;
 
@@ -44,15 +41,15 @@ public class GUI {
     // Número de files (capçalera inclosa) i columnes de la taula
     int files = 8, columnes = 4;
 
-    int files1 = 4, columnes1 = 2;
+    int files1 = 8, columnes1 = 2;
 
     // Títols de les columnes
     String[] headers = {"Data", " Medicament ", "Causa de falta","Resolució"};
-    String[] headers1 = {"Data", " Medicament "};
+    String[] headers1 = {"Nom del producte", " Nombre de faltes"};
 
     // Amplades de les columnes
     float[] colWidths = {20, 30, 30, 20};
-    float[] colWidths1 = {20, 80};
+    float[] colWidths1 = {40, 60};
 
     // Dades de la taula
     String[][] info = {
@@ -234,33 +231,8 @@ public class GUI {
             {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
     };
 
-    String[][] infoc1 = {
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-    };
-
-    String[][] infoc2 = {
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-    };
-
-    String[][] infoc3 = {
+    //taula comanda
+    String[][] infoComanda = {
             {"Nom producte", "Nombre faltes"},
             {"Nom producte", "Nombre faltes"},
             {"Nom producte", "Nombre faltes"},
@@ -275,12 +247,14 @@ public class GUI {
 
 
 
-
-
-
-    //Select
+    //Select Pantalles
     public String[]SelectValues1 = {"Formulari", "Historial", "Estadístiques", "Comanda"};
     public static Select s1;
+
+    //Select Comanda
+    public String[]SelectValues2 = {"Parafarmàcia", "Amb recepta", "Sense recepta", "Dermocosmètica", "Ortopèdia", "Homeopatia", "Veterinària", "Infantils"};
+    public Select s2;
+
 
     // Variables radio buttons
     RadioButton rb1, rb2, rb3, rb4, rb5, rb6, rb7, rb8,rb9, rb10, rb11, rb12, rb13, rb14, rb15;
@@ -295,7 +269,37 @@ public class GUI {
     TextList1D tList;   // Llista de textos
     Button btl;         // Botons
 
-    String[] listValues = {"Alemania", "Angola", "Canada", "Brasil"};
+    String[] listValues = {"Paracetamol",
+            "Ibuprofèn",
+            "Amoxicil·lina",
+            "Omeprazol",
+            "Aspirina",
+            "Metformina",
+            "Loratadina",
+            "Cefalexina",
+            "Claritromicina",
+            "Doxiciclina",
+            "Ranitidina",
+            "Simvastatina",
+            "Losartán",
+            "Enalapril",
+            "Furosemida",
+            "Prednisona",
+            "Alprazolam",
+            "Diazepam",
+            "Levotiroxina",
+            "Salbutamol",
+            "Montelukast",
+            "Cetirizina",
+            "Tramadol",
+            "Naproxèn",
+            "Gabapentina",
+            "Metoclopramida",
+            "Clonazepam",
+            "Fluoxetina",
+            "Omeprazol-Nexium",
+            "Acetilsalicílic"
+    };
     String selectedText;
 
     // Dimensions del TextList i Botons
@@ -323,6 +327,7 @@ public class GUI {
         text3 = new TextField(p5, p5.width/2-550, p5.height/2-300, 200,40);
         text4 = new TextField(p5, p5.width/2-550, p5.height/2-200, 200,40);
         s1 = new Select(SelectValues1, p5.width/2+425, p5.height/2-390,200,50);
+        s2 = new Select(SelectValues2, 500, 100,300,50);
 
         rb1 = new RadioButton(p5, p5.width/2,355,15);
         rb2 = new RadioButton(p5, 100,355,15);
@@ -354,6 +359,7 @@ public class GUI {
         rbg3.setRadioButtons(rb8, rb9, rb10, rb11, rb12, rb13, rb14, rb15);   // Format pels 3 radio buttons
         rbg3.setSelected(2);
 
+        //taules historial
         t = new PagedTable(files, columnes);
         t.setHeaders(headers);
         t.setData(info);
@@ -394,20 +400,12 @@ public class GUI {
         t7.setData(info7);
         t7.setColumnWidths(colWidths);
 
-        tc1 = new PagedTable(files1, columnes1);
-        tc1.setHeaders(headers1);
-        tc1.setData(infoc1);
-        tc1.setColumnWidths(colWidths1);
+        //taula comanda
+        tcomanda = new PagedTable(files1, columnes1);
+        tcomanda.setHeaders(headers1);
+        tcomanda.setData(infoComanda);
+        tcomanda.setColumnWidths(colWidths1);
 
-        tc2 = new PagedTable(files1, columnes1);
-        tc2.setHeaders(headers1);
-        tc2.setData(infoc2);
-        tc2.setColumnWidths(colWidths1);
-
-        tc3 = new PagedTable(files1, columnes1);
-        tc3.setHeaders(headers1);
-        tc3.setData(infoc3);
-        tc3.setColumnWidths(colWidths1);
 
         // Creació dels botons
         btable1 = new Button(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, 720, buttonW, buttonH);
@@ -519,15 +517,18 @@ public class GUI {
     public void dibujoPantallaComanda(PApplet p5){
         p5.background(colors.getColorAt(0));
         logoPantallaHistorial(p5, logo2); //logo
+
+        btable1.display(p5);
+        btable2.display(p5);
+        tcomanda.display(p5, 100, 200, 900, 300);
+
+        tList.display(p5);
+        btl.display(p5);
+        s2.display(p5);
         s1.display(p5); //Select
 
 
 
-        btable1.display(p5);
-        btable2.display(p5);
-
-        tList.display(p5);
-        btl.display(p5);
 
     }
 

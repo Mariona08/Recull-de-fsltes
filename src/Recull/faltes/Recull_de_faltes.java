@@ -63,7 +63,6 @@ public class  Recull_de_faltes extends PApplet {
 
             case COMANDA:
             appGUI.dibujoPantallaComanda(this);
-            appGUI.tList.update(this);
 
             break;
 
@@ -172,6 +171,18 @@ public class  Recull_de_faltes extends PApplet {
             appGUI.s1.setCollapsed(true);
         }
 
+        if (appGUI.s2.mouseOverSelect(this)) {
+            if (appGUI.s2.isCollapsed()) {
+                appGUI.s2.toggle();
+            } else {
+                appGUI.s2.update(this);
+                appGUI.s2.setCollapsed(true);
+                println("Seleccionado: " + appGUI.s2.getSelectedValue());
+            }
+        } else {
+            appGUI.s2.setCollapsed(true);
+        }
+
         // Si pitjam sobre el radiobuttongroup
         appGUI.rbg1.updateOnClick(this);
 
@@ -255,7 +266,30 @@ public class  Recull_de_faltes extends PApplet {
 
             // botó TRIA
             if(appGUI.btl.mouseOverButton(this) && appGUI.btl.isEnabled()){
-                appGUI.selectedText = appGUI.tList.getSelectedValue();
+                println("Botó TRIA premut!");
+                // Esborrem el text del TextList
+                appGUI.tList.getTextField().text = "";
+
+            }
+
+            // clicar dins el camp de text
+            appGUI.tList.getTextField().isPressed(this);
+
+            // clicar una opció de la llista
+            appGUI.tList.buttonPressed(this);
+
+            // botó TRIA
+            if(appGUI.btl.mouseOverButton(this) && appGUI.btl.isEnabled()){
+                println("Botó TRIA premut!");
+                // Esborrem el text del TextList
+                appGUI.tList.getTextField().text = "";
+            }
+
+            // NEXT / PREV de la taula comanda
+            if(appGUI.btable1.mouseOverButton(this) && appGUI.btable1.isEnabled()){
+                appGUI.tcomanda.nextPage();
+            } else if(appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()){
+                appGUI.tcomanda.prevPage();
             }
         }
     }
