@@ -15,7 +15,7 @@ public class GUI {
     public PagedTable tableHistorial;
 
     //Button
-    public Button b1, b2, b3, btable1, btable2;
+    public Button b1, b2, bPersonal, bMedicaments, btable1, btable2;
 
     //Enumerat de les pantalles de l'app
     public enum PANTALLA {LOGIN, FORMULARI, HISTORIAL, ESTADISTIQUES, COMANDA};
@@ -30,18 +30,21 @@ public class GUI {
     // Dimensions dels botons
     float buttonW = 60, buttonH = 60;
 
+
     // Taula Paginada
     PagedTable t, t1, t2, t3, t4, t5, t6, t7, tcomanda;
 
     public int taulaActiva = -1;
 
     // Dimensions de la taula
-    float tableW = 800, tableH = 300;
+    float tableW = 1175, tableH = 300;
+
+
 
     // Número de files (capçalera inclosa) i columnes de la taula
     int files = 8, columnes = 4;
 
-    int files1 = 8, columnes1 = 2;
+    int files1 = 12, columnes1 = 2;
 
     // Títols de les columnes
     String[] headers = {"Data", " Medicament ", "Causa de falta","Resolució"};
@@ -243,6 +246,30 @@ public class GUI {
             {"Nom producte", "Nombre faltes"},
             {"Nom producte", "Nombre faltes"},
             {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
+            {"Nom producte", "Nombre faltes"},
     };
 
 
@@ -253,7 +280,7 @@ public class GUI {
 
     //Select Comanda
     public String[]SelectValues2 = {"Parafarmàcia", "Amb recepta", "Sense recepta", "Dermocosmètica", "Ortopèdia", "Homeopatia", "Veterinària", "Infantils"};
-    public Select s2;
+    public Select sComanda;
 
 
     // Variables radio buttons
@@ -302,9 +329,22 @@ public class GUI {
     };
     String selectedText;
 
-    // Dimensions del TextList i Botons
-    float tListW = 600, tListH = 60;
-    float buttonW1 = 120, buttonH1 = 60;
+
+    TextList1D tListPersonal;   // Llista de textos
+
+    String[] listValuesPersonal = {
+            "Farmacèutic 1",
+            "Farmacèutic 2",
+            "Farmacèutic 3",
+            "Tècnic 1",
+            "Tècnic 2",
+            "Tècnic 3",
+            "Tècnic 4",
+            "Tècnic 5",
+    };
+
+
+
 
     // public RadioButton rb1, rb2;           // Radio buttons
    // public RadioButtonGroup rbGroup;
@@ -319,7 +359,9 @@ public class GUI {
         //casa = p5.loadImage("data/casa.png");
         b1 = new Button(p5,"Login", p5.width/2-200,p5.height/2+200,400,50);
         b2 = new Button(p5,"envia", p5.width/2-200,p5.height/2+300,400,50);
-        //b3 = new Button(p5,casa, p5.width/2, p5.height/2,50,50);
+        bPersonal = new Button(p5,"Personal", p5.width/2-600,p5.height/2-325,580,50);
+        bMedicaments = new Button(p5,"Medicaments", p5.width/2+20,p5.height/2-325,580,50);
+
 
 
         text1 = new PassField(p5, p5.width/2-200, p5.height/2+145, 400,50);
@@ -327,7 +369,7 @@ public class GUI {
         text3 = new TextField(p5, p5.width/2-550, p5.height/2-300, 200,40);
         text4 = new TextField(p5, p5.width/2-550, p5.height/2-200, 200,40);
         s1 = new Select(SelectValues1, p5.width/2+425, p5.height/2-390,200,50);
-        s2 = new Select(SelectValues2, 500, 100,300,50);
+        sComanda = new Select(SelectValues2, 500, 100,300,50);
 
         rb1 = new RadioButton(p5, p5.width/2,355,15);
         rb2 = new RadioButton(p5, 100,355,15);
@@ -360,56 +402,56 @@ public class GUI {
         rbg3.setSelected(2);
 
         //taules historial
-        t = new PagedTable(files, columnes);
+        t = new PagedTable(p5,files, columnes);
         t.setHeaders(headers);
         t.setData(info);
         t.setColumnWidths(colWidths);
 
-        t1 = new PagedTable(files, columnes);
+        t1 = new PagedTable(p5,files, columnes);
         t1.setHeaders(headers);
         t1.setData(info1);
         t1.setColumnWidths(colWidths);
 
-        t2 = new PagedTable(files, columnes);
+        t2 = new PagedTable(p5,files, columnes);
         t2.setHeaders(headers);
         t2.setData(info2);
         t2.setColumnWidths(colWidths);
 
-        t3 = new PagedTable(files, columnes);
+        t3 = new PagedTable(p5,files, columnes);
         t3.setHeaders(headers);
         t3.setData(info3);
         t3.setColumnWidths(colWidths);
 
-        t4 = new PagedTable(files, columnes);
+        t4 = new PagedTable(p5, files, columnes);
         t4.setHeaders(headers);
         t4.setData(info4);
         t4.setColumnWidths(colWidths);
 
-        t5 = new PagedTable(files, columnes);
+        t5 = new PagedTable(p5, files, columnes);
         t5.setHeaders(headers);
         t5.setData(info5);
         t5.setColumnWidths(colWidths);
 
-        t6 = new PagedTable(files, columnes);
+        t6 = new PagedTable(p5, files, columnes);
         t6.setHeaders(headers);
         t6.setData(info6);
         t6.setColumnWidths(colWidths);
 
-        t7 = new PagedTable(files, columnes);
+        t7 = new PagedTable(p5,files, columnes);
         t7.setHeaders(headers);
         t7.setData(info7);
         t7.setColumnWidths(colWidths);
 
         //taula comanda
-        tcomanda = new PagedTable(files1, columnes1);
+        tcomanda = new PagedTable(p5,files1, columnes1);
         tcomanda.setHeaders(headers1);
         tcomanda.setData(infoComanda);
         tcomanda.setColumnWidths(colWidths1);
 
 
         // Creació dels botons
-        btable1 = new Button(p5, "NEXT", 25 + tableW/2 + buttonW/1.5f, 720, buttonW, buttonH);
-        btable2 = new Button(p5, "PREV", 25 + tableW/2 - buttonW/1.5f, 720, buttonW, buttonH);
+        btable1 = new Button(p5, "NEXT", tableW/2 + buttonW/1.5f, 720, buttonW, buttonH);
+        btable2 = new Button(p5, "PREV", tableW/2 - buttonW/1.5f, 720, buttonW, buttonH);
 
 
 
@@ -483,27 +525,27 @@ public class GUI {
         rb15.display(p5);
 
         p5.textSize(20);
-        p5.text("Farmacèutic", 120, 162);
-        p5.text("Farmacèutic", 420, 162);
-        p5.text("Farmacèutic", 720, 162);
-        p5.text("Tècnic", 1020, 162);
-        p5.text("Tècnic", 120, 262);
-        p5.text("Tècnic", 420, 262);
-        p5.text("Tècnic", 720, 262);
-        p5.text("Tècnic", 1020, 262);
+        p5.text("Farmacèutic 1", 120, 162);
+        p5.text("Farmacèutic 2", 420, 162);
+        p5.text("Farmacèutic 3", 720, 162);
+        p5.text("Tècnic 1", 1020, 162);
+        p5.text("Tècnic 2", 120, 262);
+        p5.text("Tècnic 3", 420, 262);
+        p5.text("Tècnic 4", 720, 262);
+        p5.text("Tècnic 5", 1020, 262);
 
         // Només dibuixem la taula i els botons si hi ha taula activa
         if (taulaActiva != -1) {
 
             switch (taulaActiva) {
-                case 0: t.display(p5, 100, 350, tableW, tableH); break;
-                case 1: t1.display(p5, 100, 350, tableW, tableH); break;
-                case 2: t2.display(p5, 100, 350, tableW, tableH); break;
-                case 3: t3.display(p5, 100, 350, tableW, tableH); break;
-                case 4: t4.display(p5, 100, 350, tableW, tableH); break;
-                case 5: t5.display(p5, 100, 350, tableW, tableH); break;
-                case 6: t6.display(p5, 100, 350, tableW, tableH); break;
-                case 7: t7.display(p5, 100, 350, tableW, tableH); break;
+                case 0: t.display(p5, 50, 350, tableW, tableH); break;
+                case 1: t1.display(p5, 50, 350, tableW, tableH); break;
+                case 2: t2.display(p5, 50, 350, tableW, tableH); break;
+                case 3: t3.display(p5, 50, 350, tableW, tableH); break;
+                case 4: t4.display(p5, 50, 350, tableW, tableH); break;
+                case 5: t5.display(p5, 50, 350, tableW, tableH); break;
+                case 6: t6.display(p5, 50, 350, tableW, tableH); break;
+                case 7: t7.display(p5, 50, 350, tableW, tableH); break;
             }
 
             // Mostrem els botons NEXT / PREV només si hi ha taula activa
@@ -520,11 +562,11 @@ public class GUI {
 
         btable1.display(p5);
         btable2.display(p5);
-        tcomanda.display(p5, 100, 200, 900, 300);
+        tcomanda.display(p5, 50, 200, 1175, 490);
 
         tList.display(p5);
         btl.display(p5);
-        s2.display(p5);
+        sComanda.display(p5);
         s1.display(p5); //Select
 
 
@@ -537,6 +579,9 @@ public class GUI {
         p5.background (colors.getColorAt(0));
         logoPantallaHistorial(p5, logo2);
         s1.display(p5);
+        bPersonal.display(p5);
+        bMedicaments.display(p5);
+        tListPersonal.display(p5);
 
     }
 
@@ -556,17 +601,7 @@ public class GUI {
 
 
     }
-    //public static void casaPantallaHistorial(PApplet p5, PImage casa){
-        //p5.imageMode(PConstants.CENTER);
-       // p5.image(casa, p5.width/2+590, p5.height/2-370, casa.width*0.2f, casa.height*0.2f);
 
-   // }
-
-   // public static void casaPantallaFormulari(PApplet p5, PImage casa){
-        //p5.imageMode(PConstants.CENTER);
-        //p5.image(casa, p5.width/2+590, p5.height/2-370, casa.width*0.2f, casa.height*0.2f);
-
-    //}
 
     public static void zonaLogo(PApplet p5){
         p5.fill(200,50,100);

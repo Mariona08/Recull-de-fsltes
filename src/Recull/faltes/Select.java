@@ -80,6 +80,11 @@ public class Select {
         this.collapsed = !this.collapsed;
     }
 
+    //Posar el select a la caixa buida
+    public void clearSelection(){
+        selectedValue = "";
+        collapsed = true;
+    }
 
     public void update(PApplet p5){
         int option = clickedOption(p5);

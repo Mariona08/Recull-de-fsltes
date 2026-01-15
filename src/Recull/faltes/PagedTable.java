@@ -6,7 +6,8 @@ public class PagedTable {
 
     String[] tableHeaders;   // Títols de les columnes
     String[][] tableData;    // Dades de la taula
-    float[] columnWidths;    // Amplades de les columnes
+    float[] columnWidths;// Amplades de les columnes
+    Colors colors;// paleta de colors
 
     int numCols, numRows;  // Número de files i columnes
 
@@ -14,7 +15,9 @@ public class PagedTable {
     int numTotalPages;
 
     // Constructor
-    public PagedTable(int nr, int nc){
+
+    public PagedTable(PApplet p5,int nr, int nc){
+        colors = new Colors(p5);
         this.numRows = nr;
         this.numCols = nc;
         this.numPage = 0;
@@ -65,7 +68,7 @@ public class PagedTable {
         p5.rect(x, y, w, h);
 
         float rowHeight = h / numRows;
-        p5.fill(0xFF6B8E23);
+        p5.fill(colors.getColorAt(3));
         p5.stroke(0); p5.strokeWeight(3);
         p5.rect(x, y, w, rowHeight);
 

@@ -21,9 +21,12 @@ public class  Recull_de_faltes extends PApplet {
         appGUI = new GUI(this);
         // Creació de la Llista de Textos
         appGUI.tList = new TextList1D(this, appGUI.listValues, 50, 100, 300, 40);
-
         // Creació del Botó
-        appGUI.btl = new Button(this, "TRIA", 950, 100, 300, 40);
+        appGUI.btl = new Button(this, "TRIA", 950, 110, 275, 40);
+
+        appGUI.tListPersonal = new TextList1D(this, appGUI.listValuesPersonal, 40, 170, 1200, 40);
+
+
 
     }
 
@@ -84,10 +87,14 @@ public class  Recull_de_faltes extends PApplet {
             popStyle();
         }
 
+
+
     }
 
     void updateCursor(PApplet p5){
-        if( appGUI.btl.mouseOverButton(p5) || appGUI.tList.mouseOverButtons(p5)){
+        if( appGUI.btl.mouseOverButton(p5)
+                || appGUI.tList.mouseOverButtons(p5)
+                || appGUI.tListPersonal.mouseOverButtons(p5)){
             cursor(HAND);
         }
         else {
@@ -130,6 +137,12 @@ public class  Recull_de_faltes extends PApplet {
             appGUI.tList.getTextField().keyPressed(key, (int)keyCode);
             appGUI.tList.update(this);
         }
+        if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
+            if(appGUI.tListPersonal.getTextField().mouseOverTextField(this)){
+                appGUI.tListPersonal.getTextField().keyPressed(key, keyCode);
+                appGUI.tListPersonal.update(this);
+            }
+        }
 
     }
 
@@ -171,16 +184,16 @@ public class  Recull_de_faltes extends PApplet {
             appGUI.s1.setCollapsed(true);
         }
 
-        if (appGUI.s2.mouseOverSelect(this)) {
-            if (appGUI.s2.isCollapsed()) {
-                appGUI.s2.toggle();
+        if (appGUI.sComanda.mouseOverSelect(this)) {
+            if (appGUI.sComanda.isCollapsed()) {
+                appGUI.sComanda.toggle();
             } else {
-                appGUI.s2.update(this);
-                appGUI.s2.setCollapsed(true);
-                println("Seleccionado: " + appGUI.s2.getSelectedValue());
+                appGUI.sComanda.update(this);
+                appGUI.sComanda.setCollapsed(true);
+                println("Seleccionado: " + appGUI.sComanda.getSelectedValue());
             }
         } else {
-            appGUI.s2.setCollapsed(true);
+            appGUI.sComanda.setCollapsed(true);
         }
 
         // Si pitjam sobre el radiobuttongroup
@@ -269,7 +282,7 @@ public class  Recull_de_faltes extends PApplet {
                 println("Botó TRIA premut!");
                 // Esborrem el text del TextList
                 appGUI.tList.getTextField().text = "";
-
+                appGUI.sComanda.clearSelection(); //select en blanc
             }
 
             // clicar dins el camp de text
@@ -292,6 +305,13 @@ public class  Recull_de_faltes extends PApplet {
                 appGUI.tcomanda.prevPage();
             }
         }
+
+        if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
+            appGUI.tListPersonal.getTextField().isPressed(this);
+            appGUI.tListPersonal.buttonPressed(this);
+        }
+
+
     }
 
 }

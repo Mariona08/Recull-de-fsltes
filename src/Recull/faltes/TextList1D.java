@@ -64,7 +64,8 @@ public class TextList1D {
         if (searchFor.length() > 0) {
             for (int i=0; i<texts.length; i++) {
                 if (texts[i].startsWith(searchFor)) {
-                    Button b = new Button(p5, texts[i], x + 10, y + h + 50 + (h + 50)*numMatchs, w, h);
+                    float espai = 0;
+                    Button b = new Button(p5, texts[i], x, y + h  + (h + espai)*numMatchs, w, h);
                     buttons.add(b);
                     this.numMatchs++;
                     if (this.numMatchs==5) {
