@@ -6,6 +6,7 @@ public class  Recull_de_faltes extends PApplet {
     Fonts appFonts;
     GUI appGUI;
     PagedTable appPagedTable;
+    LinesDiagram grafica;
 
 
 
@@ -24,9 +25,29 @@ public class  Recull_de_faltes extends PApplet {
         // Creació del Botó
         appGUI.btl = new Button(this, "TRIA", 950, 110, 275, 40);
 
-        appGUI.tListPersonal = new TextList1D(this, appGUI.listValuesPersonal, 40, 170, 1200, 40);
+        grafica = new LinesDiagram(200, 300, 900, 300);
+
+        grafica.setTexts(new String[]{
+                "Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago"
+        });
+
+        grafica.setValues(new float[]{
+                12, 18, 10, 25, 30, 22, 15, 28
+        });
+
+        grafica.setColors(color(0, 100, 200));
 
 
+        // Construcció dels checkboxes
+        appGUI.cb1 = new CheckBox(this, 160,100,20);
+        appGUI.cb2 = new CheckBox(this, 160,165,20);
+        appGUI.cb3 = new CheckBox(this, 380,100,20);
+        appGUI.cb4 = new CheckBox(this, 380,165,20);
+        appGUI.cb5 = new CheckBox(this, 600,100,20);
+        appGUI.cb6 = new CheckBox(this, 600,165,20);
+        appGUI.cb7 = new CheckBox(this, 820,100,20);
+        appGUI.cb8 = new CheckBox(this, 820,165,20);
+        appGUI.cb9 = new CheckBox(this, 1040,100,20);
 
     }
 
@@ -60,14 +81,15 @@ public class  Recull_de_faltes extends PApplet {
             appGUI.dibujoPantallaFormulari(this);
             break;
 
-            case ESTADISTIQUES:
-            appGUI.dibujoPantallaEstadistica(this);
-            break;
 
             case COMANDA:
             appGUI.dibujoPantallaComanda(this);
 
             break;
+
+            case ESTADISTIQUES:
+                appGUI.dibujoPantallaEstadistica((PApplet)this, grafica);
+                break;
 
         }
 
@@ -92,14 +114,7 @@ public class  Recull_de_faltes extends PApplet {
     }
 
     void updateCursor(PApplet p5){
-        if( appGUI.btl.mouseOverButton(p5)
-                || appGUI.tList.mouseOverButtons(p5)
-                || appGUI.tListPersonal.mouseOverButtons(p5)){
-            cursor(HAND);
-        }
-        else {
-            cursor(ARROW);
-        }
+
     }
     //KEYBOARD interaction
 
@@ -137,12 +152,7 @@ public class  Recull_de_faltes extends PApplet {
             appGUI.tList.getTextField().keyPressed(key, (int)keyCode);
             appGUI.tList.update(this);
         }
-        if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
-            if(appGUI.tListPersonal.getTextField().mouseOverTextField(this)){
-                appGUI.tListPersonal.getTextField().keyPressed(key, keyCode);
-                appGUI.tListPersonal.update(this);
-            }
-        }
+
 
     }
 
@@ -269,6 +279,77 @@ public class  Recull_de_faltes extends PApplet {
             }
         }
 
+        if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
+
+            // Si pitjam sobre el checboxes
+            if(appGUI.cb1.onMouseOver(this)){
+                appGUI.cb1.toggle();
+            }
+
+            else if(appGUI.cb2.onMouseOver(this)){
+                appGUI.cb2.toggle();
+            }
+            else if(appGUI.cb3.onMouseOver(this)){
+                appGUI.cb3.toggle();
+            }
+
+            if(appGUI.cb4.onMouseOver(this)){
+                appGUI.cb4.toggle();
+            }
+
+            else if(appGUI.cb5.onMouseOver(this)){
+                appGUI.cb5.toggle();
+            }
+            else if(appGUI.cb6.onMouseOver(this)){
+                appGUI.cb6.toggle();
+            }
+            if(appGUI.cb7.onMouseOver(this)){
+                appGUI.cb7.toggle();
+            }
+
+            else if(appGUI.cb8.onMouseOver(this)){
+                appGUI.cb8.toggle();
+            }
+            if (appGUI.cb9.onMouseOver(this)) {
+
+                // comprovam l'estat actual de "Tots"
+                if (appGUI.cb9.isChecked()) {
+                    // si està activat, ho posem tot a false
+                    appGUI.cb9.setChecked(false);
+                    appGUI.cb1.setChecked(false);
+                    appGUI.cb2.setChecked(false);
+                    appGUI.cb3.setChecked(false);
+                    appGUI.cb4.setChecked(false);
+                    appGUI.cb5.setChecked(false);
+                    appGUI.cb6.setChecked(false);
+                    appGUI.cb7.setChecked(false);
+                    appGUI.cb8.setChecked(false);
+                } else {
+                    // si està desactivat, ho posem tot a true
+                    appGUI.cb9.setChecked(true);
+                    appGUI.cb1.setChecked(true);
+                    appGUI.cb2.setChecked(true);
+                    appGUI.cb3.setChecked(true);
+                    appGUI.cb4.setChecked(true);
+                    appGUI.cb5.setChecked(true);
+                    appGUI.cb6.setChecked(true);
+                    appGUI.cb7.setChecked(true);
+                    appGUI.cb8.setChecked(true);
+                }
+            }
+
+            // Miram el seu valor, per actualitzar r,g i b
+            appGUI.l = appGUI.cb1.isChecked() ? 255 : 0;
+            appGUI.m = appGUI.cb2.isChecked() ? 255 : 0;
+            appGUI.p = appGUI.cb3.isChecked() ? 255 : 0;
+            appGUI.o = appGUI.cb4.isChecked() ? 255 : 0;
+            appGUI.q = appGUI.cb5.isChecked() ? 255 : 0;
+            appGUI.u = appGUI.cb6.isChecked() ? 255 : 0;
+            appGUI.v = appGUI.cb7.isChecked() ? 255 : 0;
+            appGUI.w = appGUI.cb8.isChecked() ? 255 : 0;
+            appGUI.x = appGUI.cb8.isChecked() ? 255 : 0;
+        }
+
         if(appGUI.pantallaActual == GUI.PANTALLA.COMANDA){
 
             // clicar dins el camp de text
@@ -304,11 +385,7 @@ public class  Recull_de_faltes extends PApplet {
             } else if(appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()){
                 appGUI.tcomanda.prevPage();
             }
-        }
 
-        if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
-            appGUI.tListPersonal.getTextField().isPressed(this);
-            appGUI.tListPersonal.buttonPressed(this);
         }
 
 

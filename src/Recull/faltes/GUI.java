@@ -12,6 +12,14 @@ public class GUI {
 
     PImage logo, logo2 ;
 
+    // Variables checkbox
+    CheckBox cb1, cb2, cb3, cb4, cb5, cb6, cb7, cb8, cb9;
+
+    // Variables color (RGB)
+    float l, m, p, o, q, u, v, w, x;
+
+
+
     public PagedTable tableHistorial;
 
     //Button
@@ -330,21 +338,6 @@ public class GUI {
     String selectedText;
 
 
-    TextList1D tListPersonal;   // Llista de textos
-
-    String[] listValuesPersonal = {
-            "Farmacèutic 1",
-            "Farmacèutic 2",
-            "Farmacèutic 3",
-            "Tècnic 1",
-            "Tècnic 2",
-            "Tècnic 3",
-            "Tècnic 4",
-            "Tècnic 5",
-    };
-
-
-
 
     // public RadioButton rb1, rb2;           // Radio buttons
    // public RadioButtonGroup rbGroup;
@@ -359,8 +352,7 @@ public class GUI {
         //casa = p5.loadImage("data/casa.png");
         b1 = new Button(p5,"Login", p5.width/2-200,p5.height/2+200,400,50);
         b2 = new Button(p5,"envia", p5.width/2-200,p5.height/2+300,400,50);
-        bPersonal = new Button(p5,"Personal", p5.width/2-600,p5.height/2-325,580,50);
-        bMedicaments = new Button(p5,"Medicaments", p5.width/2+20,p5.height/2-325,580,50);
+        bPersonal = new Button(p5,"Personal", p5.width/2-600,p5.height/2-325,100,100);
 
 
 
@@ -575,13 +567,34 @@ public class GUI {
     }
 
 
-    public void dibujoPantallaEstadistica(PApplet p5){
-        p5.background (colors.getColorAt(0));
+    public void dibujoPantallaEstadistica(PApplet p5, LinesDiagram grafica){
+        p5.background(colors.getColorAt(0));
         logoPantallaHistorial(p5, logo2);
-        s1.display(p5);
+
+        cb1.display(p5);
+        cb2.display(p5);
+        cb3.display(p5);
+        cb4.display(p5);
+        cb5.display(p5);
+        cb6.display(p5);
+        cb7.display(p5);
+        cb8.display(p5);
+        cb9.display(p5);
+
+        p5.text("Farmacèutic 1", 190, 115);
+        p5.text("Farmacèutic 2", 190, 180);
+        p5.text("Farmacèutic 3", 410, 115);
+        p5.text("Tècnic 1", 410, 180);
+        p5.text("Tècnic 2", 630, 115);
+        p5.text("Tècnic 3", 630, 180);
+        p5.text("Tècnic 4", 850, 115);
+        p5.text("Tècnic 5", 850, 180);
+        p5.text("Tots", 1070, 115);
+
         bPersonal.display(p5);
-        bMedicaments.display(p5);
-        tListPersonal.display(p5);
+        s1.display(p5);
+
+        grafica.display(p5);
 
     }
 
