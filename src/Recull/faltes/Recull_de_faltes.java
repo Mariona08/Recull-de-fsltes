@@ -7,8 +7,8 @@ public class  Recull_de_faltes extends PApplet {
     GUI appGUI;
     PagedTable appPagedTable;
     LinesDiagram grafica;
-
-
+    boolean loginWrong= false;
+    DataBase db;
 
     public static void main(String[] args) {
         PApplet.main("Recull.faltes.Recull_de_faltes");
@@ -18,8 +18,12 @@ public class  Recull_de_faltes extends PApplet {
         fullScreen();
     }
     public void setup(){
+        db = new DataBase("admin", "12345", "medicaments");
+        db.connect();
+
         appFonts = new Fonts(this);
         appGUI = new GUI(this);
+
         // Creació de la Llista de Textos
         appGUI.tList = new TextList1D(this, appGUI.listValues, 50, 100, 300, 40);
         // Creació del Botó
@@ -117,28 +121,22 @@ public class  Recull_de_faltes extends PApplet {
 
     }
     //KEYBOARD interaction
+    public void keyTyped(){
+        GUI.text1.keyTyped(key);
+        GUI.text2.keyTyped(key);
+    }
+
 
     public void keyPressed(){
-        if(key=='0'){
-            appGUI.pantallaActual = GUI.PANTALLA.LOGIN;
-        }
-        else if(key=='1'){
-            appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
-        }
-        else if(key=='2'){
-            appGUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
-        }
-        else if(key=='3'){
-            appGUI.pantallaActual = GUI.PANTALLA.COMANDA;
-        }
+
 
         if(appGUI.pantallaActual==GUI.PANTALLA.LOGIN) {
-            appGUI.text1.keyPressed(key, keyCode);
-            appGUI.text2.keyPressed(key, keyCode);
+            GUI.text1.keyPressed(keyCode);
+            GUI.text2.keyPressed(keyCode);
         }
         if(appGUI.pantallaActual== GUI.PANTALLA.FORMULARI) {
-            appGUI.text3.keyPressed(key, keyCode);
-            appGUI.text4.keyPressed(key, keyCode);
+            GUI.text3.keyPressed(key, keyCode);
+            GUI.text4.keyPressed(key, keyCode);
         }
 
         if(keyCode==LEFT){
@@ -158,8 +156,17 @@ public class  Recull_de_faltes extends PApplet {
 
     public void mousePressed() {
         if(appGUI.b1.mouseOverButton(this)) {
-            println("B1 has been pressed!!");
-            appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+            String nom = GUI.text2.getText();
+            String contraseña = GUI.text1.getText();
+            if(db.loginCorrecte(nom, contraseña)){
+                println("LOGIN Ok");
+                appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+            }
+            else{
+                println("LOGIN WRONG");
+                loginWrong = true;
+            }
+
         }
 
         if(appGUI.b2.mouseOverButton(this)) {
@@ -385,10 +392,6 @@ public class  Recull_de_faltes extends PApplet {
             } else if(appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()){
                 appGUI.tcomanda.prevPage();
             }
-
         }
-
-
     }
-
 }
