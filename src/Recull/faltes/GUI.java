@@ -47,7 +47,8 @@ public class GUI {
     // Dimensions de la taula
     float tableW = 1175, tableH = 300;
 
-
+    // Saber quin usuari hi ha en marxa
+    public static String usuariActual;
 
     // Número de files (capçalera inclosa) i columnes de la taula
     int files = 8, columnes = 4;

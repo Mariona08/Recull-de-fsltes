@@ -160,6 +160,10 @@ public class  Recull_de_faltes extends PApplet {
             String contraseña = GUI.text1.getText();
             if(db.loginCorrecte(nom, contraseña)){
                 println("LOGIN Ok");
+
+                // Guardem l'usuari actiu
+                GUI.usuariActual = nom;
+
                 appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
             }
             else{
@@ -185,14 +189,14 @@ public class  Recull_de_faltes extends PApplet {
                 else if (appGUI.rb6.isChecked()) resolucio = "Demanat encàrrec";
                 else if (appGUI.rb7.isChecked()) resolucio = "Res";
 
-                String sql = "INSERT INTO incidencies (nom_medicament, codi, tipus_falta, resolucio, data_registre) VALUES (?, ?, ?, ?, NOW())";
-
+                String sql = "INSERT INTO incidencies(nom_medicament, codi, tipus_falta, resolucio, usuari, data_registre) VALUES (?, ?, ?, ?, ?, NOW())";
                 java.sql.PreparedStatement ps = db.getConnection().prepareStatement(sql);
 
-                ps.setString(1, nom);
-                ps.setString(2, codi);
-                ps.setString(3, tipus);
-                ps.setString(4, resolucio);
+                ps.setString(1, nom);                // Data
+                ps.setString(2, codi);               // Medicament
+                ps.setString(3, tipus);              // Causa
+                ps.setString(4, resolucio);          // Resolucio
+                ps.setString(5, GUI.usuariActual);   // Usuari
 
                 ps.executeUpdate();
 
