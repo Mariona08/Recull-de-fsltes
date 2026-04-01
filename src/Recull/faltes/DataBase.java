@@ -96,6 +96,11 @@ public class DataBase {
         }
     }
 
+    public Connection getConnection() {
+        return c;
+    }
+
+
     //FUnció q retorna el nom del client amb un cert DNI
     public String getNomClientAmbDNI(String dni) {
         String q = "SELECT Nom FROM client WHERE DNI ='" + dni + "'";

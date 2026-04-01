@@ -166,11 +166,41 @@ public class  Recull_de_faltes extends PApplet {
                 println("LOGIN WRONG");
                 loginWrong = true;
             }
-
         }
 
         if(appGUI.b2.mouseOverButton(this)) {
-            println("B2 has been pressed!!");
+
+            try {
+                String nom = GUI.text3.getText();
+                String codi = GUI.text4.getText();
+
+                String tipus = "";
+                if (appGUI.rb1.isChecked()) tipus = "Problema subministrament";
+                else if (appGUI.rb2.isChecked()) tipus = "Article nou";
+                else if (appGUI.rb3.isChecked()) tipus = "Article comanda externa";
+                else if (appGUI.rb4.isChecked()) tipus = "Trencament estoc";
+
+                String resolucio = "";
+                if (appGUI.rb5.isChecked()) resolucio = "Substitució";
+                else if (appGUI.rb6.isChecked()) resolucio = "Demanat encàrrec";
+                else if (appGUI.rb7.isChecked()) resolucio = "Res";
+
+                String sql = "INSERT INTO incidencies (nom_medicament, codi, tipus_falta, resolucio, data_registre) VALUES (?, ?, ?, ?, NOW())";
+
+                java.sql.PreparedStatement ps = db.getConnection().prepareStatement(sql);
+
+                ps.setString(1, nom);
+                ps.setString(2, codi);
+                ps.setString(3, tipus);
+                ps.setString(4, resolucio);
+
+                ps.executeUpdate();
+
+                println("GUARDAT A MYSQL ");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         GUI.text1.isPressed(this);
