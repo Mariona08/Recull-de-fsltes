@@ -22,7 +22,7 @@ public class  Recull_de_faltes extends PApplet {
         db.connect();
 
         appFonts = new Fonts(this);
-        appGUI = new GUI(this);
+        appGUI = new GUI(this, db);
 
         // Creació de la Llista de Textos
         appGUI.tList = new TextList1D(this, appGUI.listValues, 50, 100, 300, 40);
@@ -32,12 +32,12 @@ public class  Recull_de_faltes extends PApplet {
         grafica = new LinesDiagram(200, 300, 900, 300);
 
         grafica.setTexts(new String[]{
-                "Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago"
+                "Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dec"
         });
 
-        grafica.setValues(new float[]{
+        /*grafica.setValues(new float[]{
                 12, 18, 10, 25, 30, 22, 15, 28
-        });
+        });*/
 
         grafica.setColors(color(0, 100, 200));
 
@@ -74,22 +74,22 @@ public class  Recull_de_faltes extends PApplet {
         // Dibuixa la pantalla corresponent
         switch(appGUI.pantallaActual) {
             case LOGIN:
-            appGUI.dibujoPantallaLogIn(this);
-            break;
+                appGUI.dibujoPantallaLogIn(this);
+                break;
 
             case HISTORIAL:
-            appGUI.dibujoPantallaHistorial(this);
-            break;
+                appGUI.dibujoPantallaHistorial(this);
+                break;
 
             case FORMULARI:
-            appGUI.dibujoPantallaFormulari(this);
-            break;
+                appGUI.dibujoPantallaFormulari(this);
+                break;
 
 
             case COMANDA:
-            appGUI.dibujoPantallaComanda(this);
+                appGUI.dibujoPantallaComanda(this);
 
-            break;
+                break;
 
             case ESTADISTIQUES:
                 appGUI.dibujoPantallaEstadistica((PApplet)this, grafica);
@@ -126,6 +126,25 @@ public class  Recull_de_faltes extends PApplet {
         GUI.text2.keyTyped(key);
     }
 
+    void resetFormulari() {
+        // Camps de text
+        GUI.text3.setText("");
+        GUI.text4.setText("");
+
+        // Radio buttons (tipus)
+        appGUI.rb1.setChecked(false);
+        appGUI.rb2.setChecked(false);
+        appGUI.rb3.setChecked(false);
+        appGUI.rb4.setChecked(false);
+
+        // Radio buttons (resolució)
+        appGUI.rb5.setChecked(false);
+        appGUI.rb6.setChecked(false);
+        appGUI.rb7.setChecked(false);
+
+        // Select (tipus medicament)
+        appGUI.sComanda.clearSelection();
+    }
 
     public void keyPressed(){
 
@@ -177,7 +196,6 @@ public class  Recull_de_faltes extends PApplet {
             try {
                 String nom = GUI.text3.getText();
                 String codi = GUI.text4.getText();
-
                 String tipus = "";
                 if (appGUI.rb1.isChecked()) tipus = "Problema subministrament";
                 else if (appGUI.rb2.isChecked()) tipus = "Article nou";
@@ -189,18 +207,21 @@ public class  Recull_de_faltes extends PApplet {
                 else if (appGUI.rb6.isChecked()) resolucio = "Demanat encàrrec";
                 else if (appGUI.rb7.isChecked()) resolucio = "Res";
 
-                String sql = "INSERT INTO incidencies(nom_medicament, codi, tipus_falta, resolucio, usuari, data_registre) VALUES (?, ?, ?, ?, ?, NOW())";
+                String tipusMedic = appGUI.sComanda.getSelectedValue();
+                String sql = "INSERT INTO incidencies(nom_medicament, codi, tipus_falta, resolucio, usuari, tipus_medicament, data_registre) VALUES (?, ?, ?, ?, ?, ?, NOW())";
                 java.sql.PreparedStatement ps = db.getConnection().prepareStatement(sql);
 
                 ps.setString(1, nom);                // Data
                 ps.setString(2, codi);               // Medicament
                 ps.setString(3, tipus);              // Causa
-                ps.setString(4, resolucio);          // Resolucio
+                ps.setString(4, resolucio);
+                ps.setString(6, tipusMedic);         // Resolucio
                 ps.setString(5, GUI.usuariActual);   // Usuari
 
                 ps.executeUpdate();
 
                 println("GUARDAT A MYSQL ");
+                resetFormulari();
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -322,6 +343,13 @@ public class  Recull_de_faltes extends PApplet {
 
         if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
 
+            if(appGUI.bPersonal.mouseOverButton(this)){
+                appGUI.modeEstadistiques = 1;
+            }
+
+            if(appGUI.bMedicaments.mouseOverButton(this)){
+                appGUI.modeEstadistiques = 2;
+            }
             // Si pitjam sobre el checboxes
             if(appGUI.cb1.onMouseOver(this)){
                 appGUI.cb1.toggle();
@@ -377,6 +405,16 @@ public class  Recull_de_faltes extends PApplet {
                     appGUI.cb7.setChecked(true);
                     appGUI.cb8.setChecked(true);
                 }
+
+                String[] usuaris = appGUI.getUsuarisSeleccionats();
+
+                println("Usuaris seleccionats: " + usuaris.length);
+
+                if(usuaris.length > 0){
+                    float[] dades = db.getIncidenciesPerMes(usuaris);
+                    println("Actualitzant gràfic!");
+                    grafica.setValues(dades);
+                }
             }
 
             // Miram el seu valor, per actualitzar r,g i b
@@ -389,23 +427,28 @@ public class  Recull_de_faltes extends PApplet {
             appGUI.v = appGUI.cb7.isChecked() ? 255 : 0;
             appGUI.w = appGUI.cb8.isChecked() ? 255 : 0;
             appGUI.x = appGUI.cb8.isChecked() ? 255 : 0;
+
+            if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
+
+                // 1️⃣ Recollim tots els filtres actius
+                String[] usuaris = appGUI.getUsuarisSeleccionats();  // filtres personal
+                String tipusMedicament = null;
+                if(appGUI.sComanda.getSelectedValue() != null && !appGUI.sComanda.getSelectedValue().equals("")){
+                    tipusMedicament = appGUI.sComanda.getSelectedValue(); // filtre medicament
+                }
+
+                float[] dades = db.getIncidenciesPerMesItipus(usuaris, tipusMedicament);
+
+                for(int i = 0; i < 12; i++){
+                    println("Mes " + (i+1) + ": " + dades[i]);
+                }
+            }
         }
+
+
 
         if(appGUI.pantallaActual == GUI.PANTALLA.COMANDA){
 
-            // clicar dins el camp de text
-            appGUI.tList.getTextField().isPressed(this);
-
-            // clicar una opció de la llista
-            appGUI.tList.buttonPressed(this);
-
-            // botó TRIA
-            if(appGUI.btl.mouseOverButton(this) && appGUI.btl.isEnabled()){
-                println("Botó TRIA premut!");
-                // Esborrem el text del TextList
-                appGUI.tList.getTextField().text = "";
-                appGUI.sComanda.clearSelection(); //select en blanc
-            }
 
             // clicar dins el camp de text
             appGUI.tList.getTextField().isPressed(this);
@@ -416,8 +459,25 @@ public class  Recull_de_faltes extends PApplet {
             // botó TRIA
             if(appGUI.btl.mouseOverButton(this) && appGUI.btl.isEnabled()){
                 println("Botó TRIA premut!");
-                // Esborrem el text del TextList
-                appGUI.tList.getTextField().text = "";
+
+                String seleccionat = appGUI.tList.getTextField().text;
+
+                if(seleccionat != null && !seleccionat.equals("")){
+
+                    // eliminar de la base de dades
+                    db.eliminarComanda(seleccionat);
+
+                    // refrescar taula
+                    appGUI.infoComanda = db.getMedicamentsComanda();
+                    appGUI.tcomanda.setData(appGUI.infoComanda);
+
+                    // refrescar llista
+                    appGUI.listValues = db.getNomsMedicamentsComanda();
+                    appGUI.tList.setValues(appGUI.listValues);
+
+                    // netejar text
+                    appGUI.tList.getTextField().text = "";
+                }
             }
 
             // NEXT / PREV de la taula comanda

@@ -12,11 +12,19 @@ public class GUI {
 
     PImage logo, logo2 ;
 
+    public int modeEstadistiques = 0;
+    // 0 = res
+    // 1 = personal
+    // 2 = tipus medicament
+
+
     // Variables checkbox
     CheckBox cb1, cb2, cb3, cb4, cb5, cb6, cb7, cb8, cb9;
 
     // Variables color (RGB)
     float l, m, p, o, q, u, v, w, x;
+
+    DataBase db;
 
 
 
@@ -56,7 +64,7 @@ public class GUI {
     int files1 = 12, columnes1 = 2;
 
     // Títols de les columnes
-    String[] headers = {"Data", " Medicament ", "Causa de falta","Resolució"};
+    String[] headers = {"Data", " Medicament ", "Causa de falta", "Resolució"};
     String[] headers1 = {"Nom del producte", " Nombre de faltes"};
 
     // Amplades de les columnes
@@ -64,222 +72,24 @@ public class GUI {
     float[] colWidths1 = {40, 60};
 
     // Dades de la taula
-    String[][] info = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info = {};
 
-    String[][] info1 = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info1 = {};
 
-    String[][] info2 = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info2 = {};
 
-    String[][] info3 = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info3 = {};
 
-    String[][] info4 = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info4 = {};
 
-    String[][] info5 = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info5 = {};
 
-    String[][] info6 = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info6 = {};
 
-    String[][] info7 = {
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-            {"__/__/__", "Nom Medicament", "Causa de falta", "Resolució"},
-    };
+    String[][] info7 = {};
 
     //taula comanda
-    String[][] infoComanda = {
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-            {"Nom producte", "Nombre faltes"},
-    };
+    String[][] infoComanda = {};
 
 
 
@@ -290,6 +100,27 @@ public class GUI {
     //Select Comanda
     public String[]SelectValues2 = {"Parafarmàcia", "Amb recepta", "Sense recepta", "Dermocosmètica", "Ortopèdia", "Homeopatia", "Veterinària", "Infantils"};
     public Select sComanda;
+
+    public boolean almenysUnSeleccionat(){
+        return cb1.isChecked() || cb2.isChecked() || cb3.isChecked() ||
+                cb4.isChecked() || cb5.isChecked() || cb6.isChecked() ||
+                cb7.isChecked() || cb8.isChecked();
+    }
+
+    public String[] getUsuarisSeleccionats(){
+        java.util.ArrayList<String> llista = new java.util.ArrayList<>();
+
+        if(cb1.isChecked()) llista.add("Farmaceutic1");
+        if(cb2.isChecked()) llista.add("Farmaceutic2");
+        if(cb3.isChecked()) llista.add("Farmaceutic3");
+        if(cb4.isChecked()) llista.add("Tecnic1");
+        if(cb5.isChecked()) llista.add("Tecnic2");
+        if(cb6.isChecked()) llista.add("Tecnic3");
+        if(cb7.isChecked()) llista.add("Tecnic4");
+        if(cb8.isChecked()) llista.add("Tecnic5");
+
+        return llista.toArray(new String[0]);
+    }
 
 
     // Variables radio buttons
@@ -304,48 +135,19 @@ public class GUI {
     // Elements de la Interfície Gràfica (TextList)
     TextList1D tList;   // Llista de textos
     Button btl;         // Botons
+    String[] listValues = {};
 
-    String[] listValues = {"Paracetamol",
-            "Ibuprofèn",
-            "Amoxicil·lina",
-            "Omeprazol",
-            "Aspirina",
-            "Metformina",
-            "Loratadina",
-            "Cefalexina",
-            "Claritromicina",
-            "Doxiciclina",
-            "Ranitidina",
-            "Simvastatina",
-            "Losartán",
-            "Enalapril",
-            "Furosemida",
-            "Prednisona",
-            "Alprazolam",
-            "Diazepam",
-            "Levotiroxina",
-            "Salbutamol",
-            "Montelukast",
-            "Cetirizina",
-            "Tramadol",
-            "Naproxèn",
-            "Gabapentina",
-            "Metoclopramida",
-            "Clonazepam",
-            "Fluoxetina",
-            "Omeprazol-Nexium",
-            "Acetilsalicílic"
-    };
+
     String selectedText;
 
 
 
     // public RadioButton rb1, rb2;           // Radio buttons
-   // public RadioButtonGroup rbGroup;
+    // public RadioButtonGroup rbGroup;
 
-    public GUI(PApplet p5){
+    public GUI(PApplet p5, DataBase db){
         pantallaActual = PANTALLA.LOGIN;
-
+        this.db = db;
         colors = new Colors(p5);
 
         logo = p5.loadImage("data/logo.png");
@@ -354,8 +156,9 @@ public class GUI {
         b1 = new Button(p5,"Login", p5.width/2-200,p5.height/2+200,400,50);
         b2 = new Button(p5,"envia", p5.width/2-200,p5.height/2+300,400,50);
         bPersonal = new Button(p5,"Personal", p5.width/2-600,p5.height/2-325,100,100);
+        bMedicaments = new Button(p5,"Tipus Medicament", p5.width/2-400,p5.height/2-225,200,80);
 
-
+        listValues = db.getNomsMedicamentsComanda();
 
         text1 = new PassField(p5, p5.width/2-200, p5.height/2+145, 400,50);
         text2 = new TextField(p5, p5.width/2-200, p5.height/2+70, 400,50);
@@ -397,49 +200,60 @@ public class GUI {
         //taules historial
         t = new PagedTable(p5,files, columnes);
         t.setHeaders(headers);
+        info = db.getIncidenciesUsuari("Farmaceutic1");
         t.setData(info);
         t.setColumnWidths(colWidths);
 
         t1 = new PagedTable(p5,files, columnes);
         t1.setHeaders(headers);
+        info1 = db.getIncidenciesUsuari("Farmaceutic2");
         t1.setData(info1);
         t1.setColumnWidths(colWidths);
 
         t2 = new PagedTable(p5,files, columnes);
         t2.setHeaders(headers);
+        info2 = db.getIncidenciesUsuari("Farmaceutic3");
         t2.setData(info2);
         t2.setColumnWidths(colWidths);
 
         t3 = new PagedTable(p5,files, columnes);
         t3.setHeaders(headers);
+        info3 = db.getIncidenciesUsuari("Tecnic1");
         t3.setData(info3);
         t3.setColumnWidths(colWidths);
 
         t4 = new PagedTable(p5, files, columnes);
         t4.setHeaders(headers);
+        info4 = db.getIncidenciesUsuari("Tecnic2");
         t4.setData(info4);
         t4.setColumnWidths(colWidths);
 
         t5 = new PagedTable(p5, files, columnes);
         t5.setHeaders(headers);
+        info5 = db.getIncidenciesUsuari("Tecnic3");
         t5.setData(info5);
         t5.setColumnWidths(colWidths);
 
         t6 = new PagedTable(p5, files, columnes);
         t6.setHeaders(headers);
+        info6 = db.getIncidenciesUsuari("Tecnic4");
         t6.setData(info6);
         t6.setColumnWidths(colWidths);
 
         t7 = new PagedTable(p5,files, columnes);
         t7.setHeaders(headers);
+        info7 = db.getIncidenciesUsuari("Tecnic5");
         t7.setData(info7);
         t7.setColumnWidths(colWidths);
 
         //taula comanda
+
+        infoComanda = db.getMedicamentsComanda() ;
         tcomanda = new PagedTable(p5,files1, columnes1);
         tcomanda.setHeaders(headers1);
         tcomanda.setData(infoComanda);
         tcomanda.setColumnWidths(colWidths1);
+
 
 
         // Creació dels botons
@@ -467,9 +281,10 @@ public class GUI {
     public void dibujoPantallaFormulari(PApplet p5){
         p5.background (colors.getColorAt(0));
         logoPantallaHistorial(p5, logo2);
-       // casaPantallaHistorial(p5, casa);
+        // casaPantallaHistorial(p5, casa);
         b2.display(p5);
-       // b3.display(p5);
+
+        // b3.display(p5);
         p5.textSize(15);
         p5.text("Nom medicament", p5.width/2-550, p5.height/2-310);
         p5.textSize(15);
@@ -498,6 +313,8 @@ public class GUI {
         p5.text("Demanat encàrrec", p5.width/2-515, 556);
         p5.textSize(20);
         p5.text("Res", p5.width/2-515, 626);
+
+        sComanda.display(p5);
 
 
     }
@@ -559,7 +376,7 @@ public class GUI {
 
         tList.display(p5);
         btl.display(p5);
-        sComanda.display(p5);
+
         s1.display(p5); //Select
 
 
@@ -567,41 +384,65 @@ public class GUI {
 
     }
 
-
     public void dibujoPantallaEstadistica(PApplet p5, LinesDiagram grafica){
+        // Fons i logo
         p5.background(colors.getColorAt(0));
         logoPantallaHistorial(p5, logo2);
 
-        cb1.display(p5);
-        cb2.display(p5);
-        cb3.display(p5);
-        cb4.display(p5);
-        cb5.display(p5);
-        cb6.display(p5);
-        cb7.display(p5);
-        cb8.display(p5);
-        cb9.display(p5);
-
-        p5.text("Farmacèutic 1", 190, 115);
-        p5.text("Farmacèutic 2", 190, 180);
-        p5.text("Farmacèutic 3", 410, 115);
-        p5.text("Tècnic 1", 410, 180);
-        p5.text("Tècnic 2", 630, 115);
-        p5.text("Tècnic 3", 630, 180);
-        p5.text("Tècnic 4", 850, 115);
-        p5.text("Tècnic 5", 850, 180);
-        p5.text("Tots", 1070, 115);
-
+        // BOTONS (sempre visibles)
         bPersonal.display(p5);
-        s1.display(p5);
+        bMedicaments.display(p5);
 
-        grafica.display(p5);
+        s1.display(p5);  // slider general, si el tens
 
+        // 🔹 MODE PERSONAL
+        if(modeEstadistiques == 1){
+            // dibuix checkboxes
+            cb1.display(p5);
+            cb2.display(p5);
+            cb3.display(p5);
+            cb4.display(p5);
+            cb5.display(p5);
+            cb6.display(p5);
+            cb7.display(p5);
+            cb8.display(p5);
+            cb9.display(p5);
+
+
+            // Textos de cada usuari
+            p5.text("Farmacèutic 1", 190, 115);
+            p5.text("Farmacèutic 2", 190, 180);
+            p5.text("Farmacèutic 3", 410, 115);
+            p5.text("Tècnic 1", 410, 180);
+            p5.text("Tècnic 2", 630, 115);
+            p5.text("Tècnic 3", 630, 180);
+            p5.text("Tècnic 4", 850, 115);
+            p5.text("Tècnic 5", 850, 180);
+            p5.text("Tots", 1070, 115);
+
+            if(almenysUnSeleccionat()){
+                String[] usuarisSeleccionats = getUsuarisSeleccionats();   // Agafem els seleccionats
+                grafica.values = db.getIncidenciesPerMes(usuarisSeleccionats);  // Obtenim les dades
+                grafica.display(p5);   // Dibuixem el gràfic
+            }
+
+        }
+
+        // 🔹 MODE TIPUS MEDICAMENT
+        else if(modeEstadistiques == 2){
+            // Mostrar select de comandes
+            sComanda.display(p5);
+
+            // Mostrar gràfic només si hi ha dades carregades
+            if(grafica.values != null && grafica.values.length > 0){
+                grafica.display(p5);
+            }
+        }
     }
 
 
 
-    //Zones de la GUI
+        //Zones de la GUI
 
     public static void logoLogIn(PApplet p5, PImage logo){
         p5.imageMode(PConstants.CENTER);

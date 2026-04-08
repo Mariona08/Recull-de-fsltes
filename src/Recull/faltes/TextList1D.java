@@ -52,6 +52,15 @@ public class TextList1D {
     public TextField getTextField(){
         return  this.textField;
     }
+    public void setValues(String[] texts){
+        this.texts = texts;
+
+        // reiniciam estat
+        this.buttons.clear();
+        this.textField.text = "";
+        this.selectedValue = "";
+        this.selectedId = "";
+    }
 
     public void update(PApplet p5) {
 
