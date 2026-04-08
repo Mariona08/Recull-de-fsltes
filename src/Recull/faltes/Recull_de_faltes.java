@@ -31,7 +31,7 @@ public class  Recull_de_faltes extends PApplet {
         // Creació del Botó
         appGUI.btl = new Button(this, "TRIA", 950, 110, 275, 40);
 
-        grafica = new LinesDiagram(200, 300, 900, 300);
+        grafica = new LinesDiagram(75, 250, 1100, 500);
 
         grafica.setTexts(new String[]{
                 "Gen", "Feb", "Mar", "Abr", "Mai", "Jun", "Jul", "Ago", "Sept", "Oct", "Nov", "Dec"
@@ -42,20 +42,21 @@ public class  Recull_de_faltes extends PApplet {
         });*/
 
         grafica.setColors(color(0, 100, 200));
+        grafica.setColors(appGUI.colors.getColorAt(1));
 
 
         grafica.values = new float[]{10, 20, 5, 15, 30, 25, 10, 5, 20, 15, 10, 5};
 
         // Construcció dels checkboxes
-        appGUI.cb1 = new CheckBox(this, 160,100,20);
-        appGUI.cb2 = new CheckBox(this, 160,165,20);
-        appGUI.cb3 = new CheckBox(this, 380,100,20);
-        appGUI.cb4 = new CheckBox(this, 380,165,20);
-        appGUI.cb5 = new CheckBox(this, 600,100,20);
-        appGUI.cb6 = new CheckBox(this, 600,165,20);
-        appGUI.cb7 = new CheckBox(this, 820,100,20);
-        appGUI.cb8 = new CheckBox(this, 820,165,20);
-        appGUI.cb9 = new CheckBox(this, 1040,100,20);
+        appGUI.cb1 = new CheckBox(this, 240,110,20);
+        appGUI.cb2 = new CheckBox(this, 240,175,20);
+        appGUI.cb3 = new CheckBox(this, 460,110,20);
+        appGUI.cb4 = new CheckBox(this, 460,175,20);
+        appGUI.cb5 = new CheckBox(this, 680,110,20);
+        appGUI.cb6 = new CheckBox(this, 680,175,20);
+        appGUI.cb7 = new CheckBox(this, 900,110,20);
+        appGUI.cb8 = new CheckBox(this, 900,175,20);
+        appGUI.cb9 = new CheckBox(this, 1120,110,20);
 
     }
 

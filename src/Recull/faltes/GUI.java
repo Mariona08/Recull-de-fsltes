@@ -158,26 +158,26 @@ public class GUI {
         //casa = p5.loadImage("data/casa.png");
         b1 = new Button(p5,"Login", p5.width/2-200,p5.height/2+200,400,50);
         b2 = new Button(p5,"envia", p5.width/2-200,p5.height/2+300,400,50);
-        bPersonal = new Button(p5,"Personal", p5.width/2-600,p5.height/2-325,100,100);
-        bMedicaments = new Button(p5,"Tipus Medicament", p5.width/2-400,p5.height/2-225,200,80);
+        bPersonal = new Button(p5,"Personal", p5.width/2-600,p5.height/2-325,180,50);
+        bMedicaments = new Button(p5,"Tipus Medicament", p5.width/2-600,p5.height/2-255,180,50);
 
         listValues = db.getNomsMedicamentsComanda();
 
         text1 = new PassField(p5, p5.width/2-200, p5.height/2+145, 400,50);
         text2 = new TextField(p5, p5.width/2-200, p5.height/2+70, 400,50);
         text3 = new TextField(p5, p5.width/2-550, p5.height/2-300, 200,40);
-        text4 = new TextField(p5, p5.width/2-550, p5.height/2-200, 200,40);
+        text4 = new TextField(p5, p5.width/2-300, p5.height/2-300, 200,40);
         s1 = new Select(SelectValues1, p5.width/2+425, p5.height/2-390,200,50);
-        sComandaFormulari = new Select(SelectValues2, 500, 100,300,50);
-        sComandaEstadistiques = new Select(SelectValues3, 800, 100,300,50);
+        sComandaFormulari = new Select(SelectValues2, 700, 110,300,50);
+        sComandaEstadistiques = new Select(SelectValues3, 500, 110,300,50);
 
-        rb1 = new RadioButton(p5, p5.width/2,355,15);
-        rb2 = new RadioButton(p5, 100,355,15);
-        rb3 = new RadioButton(p5, 100,425,15);
-        rb4 = new RadioButton(p5, p5.width/2,425,15);
-        rb5 = new RadioButton(p5, 100,550,15);
-        rb6 = new RadioButton(p5, p5.width/2,550,15);
-        rb7 = new RadioButton(p5, 100,620,15);
+        rb1 = new RadioButton(p5, p5.width/2,315,15);
+        rb2 = new RadioButton(p5, 100,315,15);
+        rb3 = new RadioButton(p5, 100,385,15);
+        rb4 = new RadioButton(p5, p5.width/2,385,15);
+        rb5 = new RadioButton(p5, 100,510,15);
+        rb6 = new RadioButton(p5, p5.width/2,510,15);
+        rb7 = new RadioButton(p5, 100,580,15);
         rb8 = new RadioButton(p5, 100,155,10);
         rb9 = new RadioButton(p5, 400,155,10);
         rb10 = new RadioButton(p5, 700,155,10);
@@ -288,11 +288,26 @@ public class GUI {
         // casaPantallaHistorial(p5, casa);
         b2.display(p5);
 
+        p5.stroke(this.colors.getColorAt(1)); // Color de la paleta
+        p5.strokeWeight(200);// Gruix de la línia
+        p5.strokeCap(p5.SQUARE);
+
+        // PRIMERA LÍNIA (més amunt)
+        float altura1 = 350;
+        p5.line(0, altura1, p5.width, altura1);
+
+        p5.stroke(this.colors.getColorAt(2));
+        // SEGONA LÍNIA (més avall)
+        float altura2 = 550;
+        p5.line(0, altura2, p5.width, altura2);
+
+        p5.noStroke(); // Treiem el contorn per als següents dibuixos
+
         // b3.display(p5);
         p5.textSize(15);
         p5.text("Nom medicament", p5.width/2-550, p5.height/2-310);
         p5.textSize(15);
-        p5.text("Codi", p5.width/2-550, p5.height/2-210);
+        p5.text("Codi", p5.width/2-300, p5.height/2-310);
         text3.display(p5);
         text4.display(p5);
         s1.display(p5);
@@ -304,19 +319,19 @@ public class GUI {
         rb6.display(p5);
         rb7.display(p5);
         p5.textSize(20);
-        p5.text("Problema subministrament", p5.width/2+25,361);
+        p5.text("Problema subministrament", p5.width/2+25,321);
         p5.textSize(20);
-        p5.text("Article nou", p5.width/2-515, 361);
+        p5.text("Article nou", p5.width/2-515, 321);
         p5.textSize(20);
-        p5.text("Article comanda externa", p5.width/2-515, 431);
+        p5.text("Article comanda externa", p5.width/2-515, 391);
         p5.textSize(20);
-        p5.text("Trencament estoc", p5.width/2+25, 431);
+        p5.text("Trencament estoc", p5.width/2+25, 391);
         p5.textSize(20);
-        p5.text("Substitució", p5.width/2+25,556);
+        p5.text("Substitució", p5.width/2+25,516);
         p5.textSize(20);
-        p5.text("Demanat encàrrec", p5.width/2-515, 556);
+        p5.text("Demanat encàrrec", p5.width/2-515, 516);
         p5.textSize(20);
-        p5.text("Res", p5.width/2-515, 626);
+        p5.text("Res", p5.width/2-515, 586);
 
         sComandaFormulari.display(p5);
 
@@ -404,15 +419,15 @@ public class GUI {
             cb7.display(p5); cb8.display(p5); cb9.display(p5);
 
             p5.fill(0); // Color del text
-            p5.text("Farmacèutic 1", 190, 115);
-            p5.text("Farmacèutic 2", 190, 180);
-            p5.text("Farmacèutic 3", 410, 115);
-            p5.text("Tècnic 1", 410, 180);
-            p5.text("Tècnic 2", 630, 115);
-            p5.text("Tècnic 3", 630, 180);
-            p5.text("Tècnic 4", 850, 115);
-            p5.text("Tècnic 5", 850, 180);
-            p5.text("Tots", 1070, 115);
+            p5.text("Farmacèutic 1", 270, 125);
+            p5.text("Farmacèutic 2", 270, 190);
+            p5.text("Farmacèutic 3", 490, 125);
+            p5.text("Tècnic 1", 490, 190);
+            p5.text("Tècnic 2", 710, 125);
+            p5.text("Tècnic 3", 710, 190);
+            p5.text("Tècnic 4", 930, 125);
+            p5.text("Tècnic 5", 930, 190);
+            p5.text("Tots", 1150, 125);
 
             // Només dibuixem si hi ha algú triat (la dada ja estarà carregada des de mousePressed)
             if(almenysUnSeleccionat()){

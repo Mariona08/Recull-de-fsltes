@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="27b06ab7-fbe4-4449-8daa-c4dfadfd5a3e" name="Changes" comment="hola">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Recull/faltes/DataBase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/DataBase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/GUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Recull/faltes/Recull_de_faltes.java" afterDir="false" />
     </list>
@@ -282,7 +281,15 @@
       <option name="project" value="LOCAL" />
       <updated>1775659933899</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="hola">
+      <option name="closed" value="true" />
+      <created>1775666105682</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1775666105682</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
