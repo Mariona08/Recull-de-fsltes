@@ -143,7 +143,7 @@ public class  Recull_de_faltes extends PApplet {
         appGUI.rb7.setChecked(false);
 
         // Select (tipus medicament)
-        appGUI.sComanda.clearSelection();
+        appGUI.sComandaFormulari.clearSelection();
     }
 
     public void keyPressed(){
@@ -174,28 +174,30 @@ public class  Recull_de_faltes extends PApplet {
     }
 
     public void mousePressed() {
-        if(appGUI.b1.mouseOverButton(this)) {
-            String nom = GUI.text2.getText();
-            String contraseña = GUI.text1.getText();
-            if(db.loginCorrecte(nom, contraseña)){
-                println("LOGIN Ok");
 
-                // Guardem l'usuari actiu
-                GUI.usuariActual = nom;
-
-                appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
-            }
-            else{
-                println("LOGIN WRONG");
-                loginWrong = true;
+        // ---------- BOTONS LOGIN ----------
+        if (appGUI.pantallaActual == GUI.PANTALLA.LOGIN) {
+            if(appGUI.b1.mouseOverButton(this)) {
+                String nom = GUI.text2.getText();
+                String contraseña = GUI.text1.getText();
+                if(db.loginCorrecte(nom, contraseña)){
+                    println("LOGIN Ok");
+                    GUI.usuariActual = nom;
+                    appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+                } else {
+                    println("LOGIN WRONG");
+                    loginWrong = true;
+                }
             }
         }
 
-        if(appGUI.b2.mouseOverButton(this)) {
 
+        // ---------- BOTÓ GUARDAR ----------
+        if(appGUI.b2.mouseOverButton(this)) {
             try {
                 String nom = GUI.text3.getText();
                 String codi = GUI.text4.getText();
+
                 String tipus = "";
                 if (appGUI.rb1.isChecked()) tipus = "Problema subministrament";
                 else if (appGUI.rb2.isChecked()) tipus = "Article nou";
@@ -207,20 +209,20 @@ public class  Recull_de_faltes extends PApplet {
                 else if (appGUI.rb6.isChecked()) resolucio = "Demanat encàrrec";
                 else if (appGUI.rb7.isChecked()) resolucio = "Res";
 
-                String tipusMedic = appGUI.sComanda.getSelectedValue();
+                String tipusMedic = appGUI.sComandaFormulari.getSelectedValue();
+
                 String sql = "INSERT INTO incidencies(nom_medicament, codi, tipus_falta, resolucio, usuari, tipus_medicament, data_registre) VALUES (?, ?, ?, ?, ?, ?, NOW())";
                 java.sql.PreparedStatement ps = db.getConnection().prepareStatement(sql);
 
-                ps.setString(1, nom);                // Data
-                ps.setString(2, codi);               // Medicament
-                ps.setString(3, tipus);              // Causa
+                ps.setString(1, nom);
+                ps.setString(2, codi);
+                ps.setString(3, tipus);
                 ps.setString(4, resolucio);
-                ps.setString(6, tipusMedic);         // Resolucio
-                ps.setString(5, GUI.usuariActual);   // Usuari
+                ps.setString(5, GUI.usuariActual);
+                ps.setString(6, tipusMedic);
 
                 ps.executeUpdate();
-
-                println("GUARDAT A MYSQL ");
+                println("GUARDAT A MYSQL");
                 resetFormulari();
 
             } catch (Exception e) {
@@ -228,119 +230,115 @@ public class  Recull_de_faltes extends PApplet {
             }
         }
 
+        // ---------- TEXTFIELDS ----------
         GUI.text1.isPressed(this);
         GUI.text2.isPressed(this);
         GUI.text3.isPressed(this);
         GUI.text4.isPressed(this);
 
-        if (GUI.s1.mouseOverSelect(this)) {
+        // ---------- RADIOBUTTONS ----------
+        appGUI.rbg1.updateOnClick(this);
+        appGUI.rbg2.updateOnClick(this);
+        appGUI.rbg3.updateOnClick(this);
+
+        // ---------- TAULES ----------
+        if (appGUI.rb8.isChecked()) appGUI.taulaActiva = 0;
+        else if (appGUI.rb9.isChecked()) appGUI.taulaActiva = 1;
+        else if (appGUI.rb10.isChecked()) appGUI.taulaActiva = 2;
+        else if (appGUI.rb11.isChecked()) appGUI.taulaActiva = 3;
+        else if (appGUI.rb12.isChecked()) appGUI.taulaActiva = 4;
+        else if (appGUI.rb13.isChecked()) appGUI.taulaActiva = 5;
+        else if (appGUI.rb14.isChecked()) appGUI.taulaActiva = 6;
+        else if (appGUI.rb15.isChecked()) appGUI.taulaActiva = 7;
+
+        if (appGUI.btable1.mouseOverButton(this) && appGUI.btable1.isEnabled()) {
+            switch (appGUI.taulaActiva) {
+                case 0: appGUI.t.nextPage(); break;
+                case 1: appGUI.t1.nextPage(); break;
+                case 2: appGUI.t2.nextPage(); break;
+                case 3: appGUI.t3.nextPage(); break;
+                case 4: appGUI.t4.nextPage(); break;
+                case 5: appGUI.t5.nextPage(); break;
+                case 6: appGUI.t6.nextPage(); break;
+                case 7: appGUI.t7.nextPage(); break;
+            }
+        } else if (appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()) {
+            switch (appGUI.taulaActiva) {
+                case 0: appGUI.t.prevPage(); break;
+                case 1: appGUI.t1.prevPage(); break;
+                case 2: appGUI.t2.prevPage(); break;
+                case 3: appGUI.t3.prevPage(); break;
+                case 4: appGUI.t4.prevPage(); break;
+                case 5: appGUI.t5.prevPage(); break;
+                case 6: appGUI.t6.prevPage(); break;
+                case 7: appGUI.t7.prevPage(); break;
+            }
+        }
+
+        // ---------- SELECTS (SOLAPAMENT CONTROLAT) ----------
+        boolean clickGestionat = false;
+
+        // SELECT PRINCIPAL
+        if(!clickGestionat && GUI.s1.mouseOverSelect(this)) {
+            clickGestionat = true;
+
             if (GUI.s1.isCollapsed()) {
                 GUI.s1.toggle();
             } else {
                 GUI.s1.update(this);
                 GUI.s1.setCollapsed(true);
-                println("Seleccionado: " + GUI.s1.getSelectedValue());
-            }
 
-            if (appGUI.s1.getSelectedValue().equals("Formulari")) {
-                appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
-            } else if (appGUI.s1.getSelectedValue().equals("Historial")) {
-                appGUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
-            } else if (appGUI.s1.getSelectedValue().equals("Estadístiques")) {
-                appGUI.pantallaActual = GUI.PANTALLA.ESTADISTIQUES;
-            } else if (appGUI.s1.getSelectedValue().equals("Comanda")) {
-                appGUI.pantallaActual = GUI.PANTALLA.COMANDA;
-            }
+                String val = GUI.s1.getSelectedValue();
+                println("Seleccionado: " + val);
 
-        } else {
+                if (val.equals("Formulari")) appGUI.pantallaActual = GUI.PANTALLA.FORMULARI;
+                else if (val.equals("Historial")) appGUI.pantallaActual = GUI.PANTALLA.HISTORIAL;
+                else if (val.equals("Estadístiques")) appGUI.pantallaActual = GUI.PANTALLA.ESTADISTIQUES;
+                else if (val.equals("Comanda")) appGUI.pantallaActual = GUI.PANTALLA.COMANDA;
+            }
+        } else if (!clickGestionat) {
             appGUI.s1.setCollapsed(true);
         }
 
-        if (appGUI.sComanda.mouseOverSelect(this)) {
-            if (appGUI.sComanda.isCollapsed()) {
-                appGUI.sComanda.toggle();
+        // SELECT FORMULARI
+        if(!clickGestionat
+                && appGUI.pantallaActual == GUI.PANTALLA.FORMULARI
+                && appGUI.sComandaFormulari.mouseOverSelect(this)) {
+            clickGestionat = true;
+
+            if (appGUI.sComandaFormulari.isCollapsed()) {
+                appGUI.sComandaFormulari.toggle();
             } else {
-                appGUI.sComanda.update(this);
-                appGUI.sComanda.setCollapsed(true);
-                println("Seleccionado: " + appGUI.sComanda.getSelectedValue());
+                appGUI.sComandaFormulari.update(this);
+                appGUI.sComandaFormulari.setCollapsed(true);
             }
-        } else {
-            appGUI.sComanda.setCollapsed(true);
+        } else if (!clickGestionat) {
+            appGUI.sComandaFormulari.setCollapsed(true);
         }
 
-        // Si pitjam sobre el radiobuttongroup
-        appGUI.rbg1.updateOnClick(this);
+        // SELECT ESTADÍSTIQUES (NOMÉS SI ESTÀ ACTIU)
+        if(!clickGestionat
+                && appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES
+                && appGUI.modeEstadistiques == 2
+                && appGUI.sComandaEstadistiques.mouseOverSelect(this)) {
 
-        // Miram el seu valor, per actualitzar r,g i b
-        appGUI.r = appGUI.rb1.isChecked() ? 255 : 0;
-        appGUI.g = appGUI.rb2.isChecked() ? 255 : 0;
-        appGUI.b = appGUI.rb3.isChecked() ? 255 : 0;
-        appGUI.b = appGUI.rb4.isChecked() ? 255 : 0;
+            clickGestionat = true;
 
-        appGUI.rbg2.updateOnClick(this);
-        appGUI.rbg3.updateOnClick(this);
-
-        // Miram el seu valor, per actualitzar r,g i b
-        appGUI.r = appGUI.rb5.isChecked() ? 255 : 0;
-        appGUI.g = appGUI.rb6.isChecked() ? 255 : 0;
-        appGUI.b = appGUI.rb7.isChecked() ? 255 : 0;
-
-        if (appGUI.rb8.isChecked()) {
-            appGUI.taulaActiva = 0;
-        } else if (appGUI.rb9.isChecked()) {
-            appGUI.taulaActiva = 1;
-        } else if (appGUI.rb10.isChecked()) {
-            appGUI.taulaActiva = 2;
-        } else if (appGUI.rb11.isChecked()) {
-            appGUI.taulaActiva = 3;
-        } else if (appGUI.rb12.isChecked()) {
-            appGUI.taulaActiva = 4;
-        } else if (appGUI.rb13.isChecked()) {
-            appGUI.taulaActiva = 5;
-        } else if (appGUI.rb14.isChecked()) {
-            appGUI.taulaActiva = 6;
-        } else if (appGUI.rb15.isChecked()) {
-            appGUI.taulaActiva = 7;
-        }
-
-        if (appGUI.btable1.mouseOverButton(this) && appGUI.btable1.isEnabled()) {
-            if (appGUI.taulaActiva == 0) {
-                appGUI.t.nextPage();
-            } else if (appGUI.taulaActiva == 1) {
-                appGUI.t1.nextPage();
-            } else if (appGUI.taulaActiva == 2) {
-                appGUI.t2.nextPage();
-            } else if (appGUI.taulaActiva == 3) {
-                appGUI.t3.nextPage();
-            } else if (appGUI.taulaActiva == 4) {
-                appGUI.t4.nextPage();
-            } else if (appGUI.taulaActiva == 5) {
-                appGUI.t5.nextPage();
-            } else if (appGUI.taulaActiva == 6) {
-                appGUI.t6.nextPage();
-            } else if (appGUI.taulaActiva == 7) {
-                appGUI.t7.nextPage();
-            }
-        } else if (appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()) {
-            if (appGUI.taulaActiva == 0) {
-                appGUI.t.prevPage();
-            } else if (appGUI.taulaActiva == 1) {
-                appGUI.t1.prevPage();
-            } else if (appGUI.taulaActiva == 2) {
-                appGUI.t2.prevPage();
-            } else if (appGUI.taulaActiva == 3) {
-                appGUI.t3.prevPage();
-            } else if (appGUI.taulaActiva == 4) {
-                appGUI.t4.prevPage();
-            } else if (appGUI.taulaActiva == 5) {
-                appGUI.t5.prevPage();
-            } else if (appGUI.taulaActiva == 6) {
-                appGUI.t6.prevPage();
-            } else if (appGUI.taulaActiva == 7) {
-                appGUI.t7.prevPage();
+            if (appGUI.sComandaEstadistiques.isCollapsed()) {
+                appGUI.sComandaEstadistiques.toggle();
+            } else {
+                appGUI.sComandaEstadistiques.update(this);
+                appGUI.sComandaEstadistiques.setCollapsed(true);
             }
         }
+        else if (!clickGestionat
+                && appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES
+                && appGUI.modeEstadistiques == 2) {
 
+            appGUI.sComandaEstadistiques.setCollapsed(true);
+        }
+
+        // ---------- ESTADÍSTIQUES ----------
         if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
 
             if(appGUI.bPersonal.mouseOverButton(this)){
@@ -350,40 +348,19 @@ public class  Recull_de_faltes extends PApplet {
             if(appGUI.bMedicaments.mouseOverButton(this)){
                 appGUI.modeEstadistiques = 2;
             }
-            // Si pitjam sobre el checboxes
-            if(appGUI.cb1.onMouseOver(this)){
-                appGUI.cb1.toggle();
-            }
 
-            else if(appGUI.cb2.onMouseOver(this)){
-                appGUI.cb2.toggle();
-            }
-            else if(appGUI.cb3.onMouseOver(this)){
-                appGUI.cb3.toggle();
-            }
+            // CHECKBOXES
+            if(appGUI.cb1.onMouseOver(this)) appGUI.cb1.toggle();
+            else if(appGUI.cb2.onMouseOver(this)) appGUI.cb2.toggle();
+            else if(appGUI.cb3.onMouseOver(this)) appGUI.cb3.toggle();
+            else if(appGUI.cb4.onMouseOver(this)) appGUI.cb4.toggle();
+            else if(appGUI.cb5.onMouseOver(this)) appGUI.cb5.toggle();
+            else if(appGUI.cb6.onMouseOver(this)) appGUI.cb6.toggle();
+            else if(appGUI.cb7.onMouseOver(this)) appGUI.cb7.toggle();
+            else if(appGUI.cb8.onMouseOver(this)) appGUI.cb8.toggle();
+            else if(appGUI.cb9.onMouseOver(this)) {
 
-            if(appGUI.cb4.onMouseOver(this)){
-                appGUI.cb4.toggle();
-            }
-
-            else if(appGUI.cb5.onMouseOver(this)){
-                appGUI.cb5.toggle();
-            }
-            else if(appGUI.cb6.onMouseOver(this)){
-                appGUI.cb6.toggle();
-            }
-            if(appGUI.cb7.onMouseOver(this)){
-                appGUI.cb7.toggle();
-            }
-
-            else if(appGUI.cb8.onMouseOver(this)){
-                appGUI.cb8.toggle();
-            }
-            if (appGUI.cb9.onMouseOver(this)) {
-
-                // comprovam l'estat actual de "Tots"
-                if (appGUI.cb9.isChecked()) {
-                    // si està activat, ho posem tot a false
+                if(appGUI.cb9.isChecked()){
                     appGUI.cb9.setChecked(false);
                     appGUI.cb1.setChecked(false);
                     appGUI.cb2.setChecked(false);
@@ -394,7 +371,6 @@ public class  Recull_de_faltes extends PApplet {
                     appGUI.cb7.setChecked(false);
                     appGUI.cb8.setChecked(false);
                 } else {
-                    // si està desactivat, ho posem tot a true
                     appGUI.cb9.setChecked(true);
                     appGUI.cb1.setChecked(true);
                     appGUI.cb2.setChecked(true);
@@ -405,82 +381,31 @@ public class  Recull_de_faltes extends PApplet {
                     appGUI.cb7.setChecked(true);
                     appGUI.cb8.setChecked(true);
                 }
-
-                String[] usuaris = appGUI.getUsuarisSeleccionats();
-
-                println("Usuaris seleccionats: " + usuaris.length);
-
-                if(usuaris.length > 0){
-                    float[] dades = db.getIncidenciesPerMes(usuaris);
-                    println("Actualitzant gràfic!");
-                    grafica.setValues(dades);
-                }
-            }
-
-            // Miram el seu valor, per actualitzar r,g i b
-            appGUI.l = appGUI.cb1.isChecked() ? 255 : 0;
-            appGUI.m = appGUI.cb2.isChecked() ? 255 : 0;
-            appGUI.p = appGUI.cb3.isChecked() ? 255 : 0;
-            appGUI.o = appGUI.cb4.isChecked() ? 255 : 0;
-            appGUI.q = appGUI.cb5.isChecked() ? 255 : 0;
-            appGUI.u = appGUI.cb6.isChecked() ? 255 : 0;
-            appGUI.v = appGUI.cb7.isChecked() ? 255 : 0;
-            appGUI.w = appGUI.cb8.isChecked() ? 255 : 0;
-            appGUI.x = appGUI.cb8.isChecked() ? 255 : 0;
-
-            if(appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES){
-
-                // 1️⃣ Recollim tots els filtres actius
-                String[] usuaris = appGUI.getUsuarisSeleccionats();  // filtres personal
-                String tipusMedicament = null;
-                if(appGUI.sComanda.getSelectedValue() != null && !appGUI.sComanda.getSelectedValue().equals("")){
-                    tipusMedicament = appGUI.sComanda.getSelectedValue(); // filtre medicament
-                }
-
-                float[] dades = db.getIncidenciesPerMesItipus(usuaris, tipusMedicament);
-
-                for(int i = 0; i < 12; i++){
-                    println("Mes " + (i+1) + ": " + dades[i]);
-                }
             }
         }
 
-
-
+        // ---------- COMANDA ----------
         if(appGUI.pantallaActual == GUI.PANTALLA.COMANDA){
 
-
-            // clicar dins el camp de text
             appGUI.tList.getTextField().isPressed(this);
-
-            // clicar una opció de la llista
             appGUI.tList.buttonPressed(this);
 
-            // botó TRIA
             if(appGUI.btl.mouseOverButton(this) && appGUI.btl.isEnabled()){
-                println("Botó TRIA premut!");
-
                 String seleccionat = appGUI.tList.getTextField().text;
 
                 if(seleccionat != null && !seleccionat.equals("")){
-
-                    // eliminar de la base de dades
                     db.eliminarComanda(seleccionat);
 
-                    // refrescar taula
                     appGUI.infoComanda = db.getMedicamentsComanda();
                     appGUI.tcomanda.setData(appGUI.infoComanda);
 
-                    // refrescar llista
                     appGUI.listValues = db.getNomsMedicamentsComanda();
                     appGUI.tList.setValues(appGUI.listValues);
 
-                    // netejar text
                     appGUI.tList.getTextField().text = "";
                 }
             }
 
-            // NEXT / PREV de la taula comanda
             if(appGUI.btable1.mouseOverButton(this) && appGUI.btable1.isEnabled()){
                 appGUI.tcomanda.nextPage();
             } else if(appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()){
@@ -488,4 +413,5 @@ public class  Recull_de_faltes extends PApplet {
             }
         }
     }
+
 }

@@ -99,7 +99,10 @@ public class GUI {
 
     //Select Comanda
     public String[]SelectValues2 = {"Parafarmàcia", "Amb recepta", "Sense recepta", "Dermocosmètica", "Ortopèdia", "Homeopatia", "Veterinària", "Infantils"};
-    public Select sComanda;
+    public Select sComandaFormulari;
+
+    public String[]SelectValues3 = {"Parafarmàcia", "Amb recepta", "Sense recepta", "Dermocosmètica", "Ortopèdia", "Homeopatia", "Veterinària", "Infantils"};
+    public Select sComandaEstadistiques;
 
     public boolean almenysUnSeleccionat(){
         return cb1.isChecked() || cb2.isChecked() || cb3.isChecked() ||
@@ -165,7 +168,8 @@ public class GUI {
         text3 = new TextField(p5, p5.width/2-550, p5.height/2-300, 200,40);
         text4 = new TextField(p5, p5.width/2-550, p5.height/2-200, 200,40);
         s1 = new Select(SelectValues1, p5.width/2+425, p5.height/2-390,200,50);
-        sComanda = new Select(SelectValues2, 500, 100,300,50);
+        sComandaFormulari = new Select(SelectValues2, 500, 100,300,50);
+        sComandaEstadistiques = new Select(SelectValues3, 800, 100,300,50);
 
         rb1 = new RadioButton(p5, p5.width/2,355,15);
         rb2 = new RadioButton(p5, 100,355,15);
@@ -314,7 +318,7 @@ public class GUI {
         p5.textSize(20);
         p5.text("Res", p5.width/2-515, 626);
 
-        sComanda.display(p5);
+        sComandaFormulari.display(p5);
 
 
     }
@@ -393,7 +397,6 @@ public class GUI {
         bPersonal.display(p5);
         bMedicaments.display(p5);
 
-        s1.display(p5);  // slider general, si el tens
 
         // 🔹 MODE PERSONAL
         if(modeEstadistiques == 1){
@@ -430,14 +433,22 @@ public class GUI {
 
         // 🔹 MODE TIPUS MEDICAMENT
         else if(modeEstadistiques == 2){
-            // Mostrar select de comandes
-            sComanda.display(p5);
 
-            // Mostrar gràfic només si hi ha dades carregades
-            if(grafica.values != null && grafica.values.length > 0){
+            // Obtenim el tipus seleccionat
+            String tipus = sComandaEstadistiques.getSelectedValue();
+
+            // Només si hi ha tipus seleccionat
+            if(tipus != null && !tipus.equals("")){
+                String[] totsUsuaris = {"Farmaceutic1","Farmaceutic2","Farmaceutic3",
+                        "Tecnic1","Tecnic2","Tecnic3","Tecnic4","Tecnic5"};
+                grafica.values = db.getIncidenciesPerMesItipus(totsUsuaris, tipus);
                 grafica.display(p5);
             }
+
+            // Mostrar select de tipus medicament
+            sComandaEstadistiques.display(p5);
         }
+
     }
 
 
