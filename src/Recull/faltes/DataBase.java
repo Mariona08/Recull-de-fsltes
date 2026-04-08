@@ -333,79 +333,46 @@ public class DataBase {
         }
     }
 
-    public float[] getIncidenciesPerMes(String[] usuaris){
-        float[] result = new float[12]; // 12 mesos (0 = gener, 11 = desembre)
+    public float[] getIncidenciesPerMes(String[] usuaris) {
+        float[] result = new float[12]; // Array per als 12 mesos (0-11)
+
+        // Convertim l'array d'usuaris en un format per SQL: ('User1', 'User2')
+        String llistaUsuaris = "('" + String.join("','", usuaris) + "')";
+
+        String q = "SELECT MONTH(data_registre) AS mes, COUNT(*) AS total " +
+                "FROM incidencies " +
+                "WHERE usuari IN " + llistaUsuaris + " " +
+                "GROUP BY MONTH(data_registre)";
 
         try {
-            // construir IN ('u1','u2','u3')
-            String inClause = "(";
-            for(int i = 0; i < usuaris.length; i++){
-                inClause += "'" + usuaris[i] + "'";
-                if(i < usuaris.length - 1) inClause += ",";
-            }
-            inClause += ")";
-
-            String q = "SELECT MONTH(data_registre) AS mes, COUNT(*) AS total " +
-                    "FROM incidencies " +
-                    "WHERE usuari IN " + inClause + " " +
-                    "AND data_registre >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH) " +
-                    "GROUP BY MONTH(data_registre)";
-
-            System.out.println(q);
-
             ResultSet rs = query.executeQuery(q);
-
-            while(rs.next()){
-                int mes = rs.getInt("mes") - 1; // gener=0
-                int total = rs.getInt("total");
-
-                System.out.println("MES: " + mes + " TOTAL: " + total);
-                result[mes] = total;
+            while (rs.next()) {
+                int mes = rs.getInt("mes") - 1; // MySQL: Gener=1 -> Java: Gener=0
+                result[mes] = rs.getFloat("total");
             }
-
-        } catch(Exception e){
-            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println("Error Query Personal: " + e.getMessage());
         }
-
         return result;
     }
 
-    public float[] getIncidenciesPerMesItipus(String[] usuaris, String tipusMedicament){
-        float[] result = new float[12]; // 12 mesos
+    public float[] getIncidenciesPerMesItipus(String tipusMedicament) {
+        float[] result = new float[12];
+
+        String q = "SELECT MONTH(data_registre) AS mes, COUNT(*) AS total " +
+                "FROM incidencies " +
+                "WHERE tipus_medicament = '" + tipusMedicament + "' " +
+                "GROUP BY MONTH(data_registre)";
 
         try {
-            // construir IN ('u1','u2','u3')
-            String inClause = "(";
-            for(int i = 0; i < usuaris.length; i++){
-                inClause += "'" + usuaris[i] + "'";
-                if(i < usuaris.length - 1) inClause += ",";
-            }
-            inClause += ")";
-
-            String q = "SELECT MONTH(data_registre) AS mes, COUNT(*) AS total " +
-                    "FROM incidencies " +
-                    "WHERE usuari IN " + inClause;
-
-            if(tipusMedicament != null && !tipusMedicament.equals("")){
-                q += " AND tipus_medicament = '" + tipusMedicament + "'";
-            }
-
-            q += " AND data_registre >= DATE_SUB(CURDATE(), INTERVAL 12 MONTH) " +
-                    "GROUP BY MONTH(data_registre)";
-
-            System.out.println(q);
-
             ResultSet rs = query.executeQuery(q);
-            while(rs.next()){
+            while (rs.next()) {
                 int mes = rs.getInt("mes") - 1;
-                int total = rs.getInt("total");
-                result[mes] = total;
+                result[mes] = rs.getFloat("total");
             }
-
-        } catch(Exception e){
-            System.out.println(e);
+        } catch (Exception e) {
+            System.out.println("Error Query Tipus: " + e.getMessage());
         }
-
         return result;
     }
 }

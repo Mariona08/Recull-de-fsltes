@@ -18,6 +18,8 @@ public class  Recull_de_faltes extends PApplet {
         fullScreen();
     }
     public void setup(){
+
+
         db = new DataBase("admin", "12345", "medicaments");
         db.connect();
 
@@ -41,6 +43,8 @@ public class  Recull_de_faltes extends PApplet {
 
         grafica.setColors(color(0, 100, 200));
 
+
+        grafica.values = new float[]{10, 20, 5, 15, 30, 25, 10, 5, 20, 15, 10, 5};
 
         // Construcció dels checkboxes
         appGUI.cb1 = new CheckBox(this, 160,100,20);
@@ -329,13 +333,9 @@ public class  Recull_de_faltes extends PApplet {
             } else {
                 appGUI.sComandaEstadistiques.update(this);
                 appGUI.sComandaEstadistiques.setCollapsed(true);
-            }
-        }
-        else if (!clickGestionat
-                && appGUI.pantallaActual == GUI.PANTALLA.ESTADISTIQUES
-                && appGUI.modeEstadistiques == 2) {
 
-            appGUI.sComandaEstadistiques.setCollapsed(true);
+                actualitzarDadesGrafica(); // <--- AFEGEIX AIXÒ AQUÍ
+            }
         }
 
         // ---------- ESTADÍSTIQUES ----------
@@ -343,44 +343,39 @@ public class  Recull_de_faltes extends PApplet {
 
             if(appGUI.bPersonal.mouseOverButton(this)){
                 appGUI.modeEstadistiques = 1;
+                grafica.values = new float[12]; // Netegem per seguretat
+                actualitzarDadesGrafica();
             }
 
             if(appGUI.bMedicaments.mouseOverButton(this)){
                 appGUI.modeEstadistiques = 2;
+                grafica.values = new float[12]; // Netegem per seguretat
+                actualitzarDadesGrafica();
             }
 
-            // CHECKBOXES
-            if(appGUI.cb1.onMouseOver(this)) appGUI.cb1.toggle();
-            else if(appGUI.cb2.onMouseOver(this)) appGUI.cb2.toggle();
-            else if(appGUI.cb3.onMouseOver(this)) appGUI.cb3.toggle();
-            else if(appGUI.cb4.onMouseOver(this)) appGUI.cb4.toggle();
-            else if(appGUI.cb5.onMouseOver(this)) appGUI.cb5.toggle();
-            else if(appGUI.cb6.onMouseOver(this)) appGUI.cb6.toggle();
-            else if(appGUI.cb7.onMouseOver(this)) appGUI.cb7.toggle();
-            else if(appGUI.cb8.onMouseOver(this)) appGUI.cb8.toggle();
+            // CHECKBOXES (Cada vegada que fem toggle, actualitzem dades)
+            if(appGUI.cb1.onMouseOver(this)) { appGUI.cb1.toggle(); actualitzarDadesGrafica(); }
+            else if(appGUI.cb2.onMouseOver(this)) { appGUI.cb2.toggle(); actualitzarDadesGrafica(); }
+            else if(appGUI.cb3.onMouseOver(this)) { appGUI.cb3.toggle(); actualitzarDadesGrafica(); }
+            else if(appGUI.cb4.onMouseOver(this)) { appGUI.cb4.toggle(); actualitzarDadesGrafica(); }
+            else if(appGUI.cb5.onMouseOver(this)) { appGUI.cb5.toggle(); actualitzarDadesGrafica(); }
+            else if(appGUI.cb6.onMouseOver(this)) { appGUI.cb6.toggle(); actualitzarDadesGrafica(); }
+            else if(appGUI.cb7.onMouseOver(this)) { appGUI.cb7.toggle(); actualitzarDadesGrafica(); }
+            else if(appGUI.cb8.onMouseOver(this)) { appGUI.cb8.toggle(); actualitzarDadesGrafica(); }
             else if(appGUI.cb9.onMouseOver(this)) {
+                // Lògica de "Tots"
+                boolean estatNou = !appGUI.cb9.isChecked();
+                appGUI.cb9.setChecked(estatNou);
+                appGUI.cb1.setChecked(estatNou);
+                appGUI.cb2.setChecked(estatNou);
+                appGUI.cb3.setChecked(estatNou);
+                appGUI.cb4.setChecked(estatNou);
+                appGUI.cb5.setChecked(estatNou);
+                appGUI.cb6.setChecked(estatNou);
+                appGUI.cb7.setChecked(estatNou);
+                appGUI.cb8.setChecked(estatNou);
 
-                if(appGUI.cb9.isChecked()){
-                    appGUI.cb9.setChecked(false);
-                    appGUI.cb1.setChecked(false);
-                    appGUI.cb2.setChecked(false);
-                    appGUI.cb3.setChecked(false);
-                    appGUI.cb4.setChecked(false);
-                    appGUI.cb5.setChecked(false);
-                    appGUI.cb6.setChecked(false);
-                    appGUI.cb7.setChecked(false);
-                    appGUI.cb8.setChecked(false);
-                } else {
-                    appGUI.cb9.setChecked(true);
-                    appGUI.cb1.setChecked(true);
-                    appGUI.cb2.setChecked(true);
-                    appGUI.cb3.setChecked(true);
-                    appGUI.cb4.setChecked(true);
-                    appGUI.cb5.setChecked(true);
-                    appGUI.cb6.setChecked(true);
-                    appGUI.cb7.setChecked(true);
-                    appGUI.cb8.setChecked(true);
-                }
+                actualitzarDadesGrafica(); // Actualitzem un sol cop després de canviar-los tots
             }
         }
 
@@ -410,6 +405,24 @@ public class  Recull_de_faltes extends PApplet {
                 appGUI.tcomanda.nextPage();
             } else if(appGUI.btable2.mouseOverButton(this) && appGUI.btable2.isEnabled()){
                 appGUI.tcomanda.prevPage();
+            }
+        }
+    }
+
+    void actualitzarDadesGrafica() {
+        if (appGUI.modeEstadistiques == 1) {
+            // Mode Personal
+            String[] seleccionats = appGUI.getUsuarisSeleccionats();
+            if (seleccionats.length > 0) {
+                grafica.values = db.getIncidenciesPerMes(seleccionats);
+            } else {
+                grafica.values = new float[12]; // Gràfica buida si no hi ha ningú
+            }
+        } else if (appGUI.modeEstadistiques == 2) {
+            // Mode Medicament
+            String tipus = appGUI.sComandaEstadistiques.getSelectedValue();
+            if (tipus != null && !tipus.equals("")) {
+                grafica.values = db.getIncidenciesPerMesItipus(tipus);
             }
         }
     }

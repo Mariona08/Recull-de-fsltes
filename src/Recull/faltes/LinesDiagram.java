@@ -44,6 +44,15 @@ public class LinesDiagram {
 
     public void display(PApplet p5){
 
+        if (this.values == null || this.values.length == 0) return; // Seguretat
+
+        this.maxValue = 0;
+        for(float v : this.values){
+            if(v > this.maxValue) this.maxValue = v;
+        }
+
+        // Si el màxim és 0 (no hi ha dades), posem 1 per evitar errors de divisió per zero
+        if(this.maxValue <= 0) this.maxValue = 1;
 
         p5.pushStyle();
 

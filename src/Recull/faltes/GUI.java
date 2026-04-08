@@ -397,22 +397,13 @@ public class GUI {
         bPersonal.display(p5);
         bMedicaments.display(p5);
 
-
         // 🔹 MODE PERSONAL
         if(modeEstadistiques == 1){
-            // dibuix checkboxes
-            cb1.display(p5);
-            cb2.display(p5);
-            cb3.display(p5);
-            cb4.display(p5);
-            cb5.display(p5);
-            cb6.display(p5);
-            cb7.display(p5);
-            cb8.display(p5);
-            cb9.display(p5);
+            cb1.display(p5); cb2.display(p5); cb3.display(p5);
+            cb4.display(p5); cb5.display(p5); cb6.display(p5);
+            cb7.display(p5); cb8.display(p5); cb9.display(p5);
 
-
-            // Textos de cada usuari
+            p5.fill(0); // Color del text
             p5.text("Farmacèutic 1", 190, 115);
             p5.text("Farmacèutic 2", 190, 180);
             p5.text("Farmacèutic 3", 410, 115);
@@ -423,33 +414,28 @@ public class GUI {
             p5.text("Tècnic 5", 850, 180);
             p5.text("Tots", 1070, 115);
 
+            // Només dibuixem si hi ha algú triat (la dada ja estarà carregada des de mousePressed)
             if(almenysUnSeleccionat()){
-                String[] usuarisSeleccionats = getUsuarisSeleccionats();   // Agafem els seleccionats
-                grafica.values = db.getIncidenciesPerMes(usuarisSeleccionats);  // Obtenim les dades
-                grafica.display(p5);   // Dibuixem el gràfic
+                grafica.display(p5);
             }
-
         }
 
         // 🔹 MODE TIPUS MEDICAMENT
         else if(modeEstadistiques == 2){
+            sComandaEstadistiques.display(p5);
 
-            // Obtenim el tipus seleccionat
+            // Si el desplegable té una opció, dibuixem la gràfica
             String tipus = sComandaEstadistiques.getSelectedValue();
-
-            // Només si hi ha tipus seleccionat
             if(tipus != null && !tipus.equals("")){
-                String[] totsUsuaris = {"Farmaceutic1","Farmaceutic2","Farmaceutic3",
-                        "Tecnic1","Tecnic2","Tecnic3","Tecnic4","Tecnic5"};
-                grafica.values = db.getIncidenciesPerMesItipus(totsUsuaris, tipus);
                 grafica.display(p5);
             }
-
-            // Mostrar select de tipus medicament
-            sComandaEstadistiques.display(p5);
         }
 
+        // El Select principal del menú SEMPRE al final perquè quedi per sobre de tot
+        s1.display(p5);
     }
+
+
 
 
 
