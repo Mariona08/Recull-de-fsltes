@@ -216,21 +216,36 @@ public class  Recull_de_faltes extends PApplet {
 
                 String tipusMedic = appGUI.sComandaFormulari.getSelectedValue();
 
-                String sql = "INSERT INTO incidencies(nom_medicament, codi, tipus_falta, resolucio, usuari, tipus_medicament, data_registre) VALUES (?, ?, ?, ?, ?, ?, NOW())";
-                java.sql.PreparedStatement ps = db.getConnection().prepareStatement(sql);
+                // --- ACCIÓ 1: GUARDAR A LA TAULA INCIDENCIES ---
+                String sql1 = "INSERT INTO incidencies(nom_medicament, codi, tipus_falta, resolucio, usuari, tipus_medicament, data_registre) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+                java.sql.PreparedStatement ps1 = db.getConnection().prepareStatement(sql1);
+                ps1.setString(1, nom);
+                ps1.setString(2, codi);
+                ps1.setString(3, tipus);
+                ps1.setString(4, resolucio);
+                ps1.setString(5, GUI.usuariActual);
+                ps1.setString(6, tipusMedic);
+                ps1.executeUpdate(); // Executem el primer enviament
 
-                ps.setString(1, nom);
-                ps.setString(2, codi);
-                ps.setString(3, tipus);
-                ps.setString(4, resolucio);
-                ps.setString(5, GUI.usuariActual);
-                ps.setString(6, tipusMedic);
+                println("Pas 1: Guardat a incidencies OK");
 
-                ps.executeUpdate();
-                println("GUARDAT A MYSQL");
+                // --- ACCIÓ 2: GUARDAR O ACTUALITZAR A LA TAULA COMANDES ---
+                // Aquesta frase SQL fa la màgia: si el nom ja existeix, suma 1; si no, el crea.
+                String sql2 = "INSERT INTO comandes (nom_medicament, nombre_faltes) " +
+                        "VALUES (?, 1) " +
+                        "ON DUPLICATE KEY UPDATE nombre_faltes = nombre_faltes + 1";
+
+                java.sql.PreparedStatement ps2 = db.getConnection().prepareStatement(sql2);
+                ps2.setString(1, nom);
+                ps2.executeUpdate(); // Executem el segon enviament
+
+                println("Pas 2: Actualitzat a comandes OK");
+
+                // Netejem el formulari després de l'èxit total
                 resetFormulari();
 
             } catch (Exception e) {
+                println("ERROR en l'enviament: " + e.getMessage());
                 e.printStackTrace();
             }
         }
